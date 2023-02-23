@@ -1,0 +1,14 @@
+{
+/////CONJUNTOS
+
+CONJ: letra -> a~z;
+CONJ: digito -> 0~9;
+
+////EXRESIONES REGULARES
+
+
+
+
+
+
+}

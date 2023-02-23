@@ -1,0 +1,20 @@
+{
+/////CONJUNTOS
+
+CONJ: letra -> a~z;
+CONJ: digito -> 0~9;
+
+////EXRESIONES REGULARES
+
+
+ExpReg1 -> .{letra}*|"_"|{letra}{digito};
+ExpresionReg2 -> .{digito}.|"."+{digito};
+RegEx -> .{digito}*|"_"|{letra}{digito};
+
+
+%%
+
+ExpReg1:"primerLexemaCokoa";
+ExpresionReg2: "34.44";
+
+}
