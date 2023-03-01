@@ -36,10 +36,13 @@ parser code
 terminal String PTCOMA,DOSPTO,VIRG,PARIZQ,PARDER,CORIZQ,CORDER,BRADER,BRAIZQ,COM,IDENT;
 terminal String ASIGN,PERCEN;
 terminal String LETR,DIGITO;
+terminal String ASCII;
 terminal String CONCAT,DIS,KLE,MAS,INTER;
 terminal String ENTERO;
 terminal String DECIMAL;
-terminal String CONJUNTO;
+terminal String CONJUNTO,CADENA;
+terminal String SPECHAR,COMA;
+
 
 /* 4. No Terminales */
 non terminal ini;
@@ -47,15 +50,19 @@ non terminal instrucciones;
 non terminal instruccion;
 non terminal conjus;
 non terminal Double expresion;
-
+non terminal DECLACONJUN,DECLAREGEX,PRUEBAREGEX;
+non terminal regex,declaracion;
+non terminal DEFVIR,DEFCOM;
+non terminal ELEMENT;
 /* 5. Precedencias */
 //precedence left MAS,MENOS;
 //precedence left POR,DIVIDIDO;
 
+
 /* 6. Producciones */
 
 start with ini; 
-ini::= BRAIZQ instrucciones BRADER;
+ini ::= BRAIZQ instrucciones;
 
 instrucciones ::= instrucciones instruccion 
                   | instrucciones error
@@ -63,16 +70,64 @@ instrucciones ::= instrucciones instruccion
 ; 
 
 instruccion ::= 
-   CONJUNTO DOSPTO IDENT ASIGN conjus PTCOMA
-    {:
-    
-        System.out.println("Cadena Hata aqui valida");
-    
-    :}
+             DECLACONJUN
+            |DECLAREGEX 
+            |PERCEN PRUEBAREGEX BRADER
 ;
 
-conjus ::= LETR VIRG LETR {:System.out.println("CONJUNTO DE LETRAS ");:}
-            | DIGITO VIRG DIGITO {:System.out.println("CONJUNTO DE Digitos");:}      
+
+DECLACONJUN ::= CONJUNTO DOSPTO IDENT ASIGN conjus PTCOMA 
 ;
+
+
+conjus ::= DEFVIR
+        | DEFCOM
+
+;
+
+DEFVIR ::= LETR VIRG LETR {:System.out.println("CONJUNTO DE LETRAS ");:}
+            | DIGITO VIRG DIGITO {:System.out.println("CONJUNTO DE Digitos");:}
+            | ASCII:a VIRG ASCII:b {:RESULT=a;System.out.println("Conjunto de ascii");:}
+;
+
+DEFCOM ::= 
+        DEFCOM COMA ELEMENT 
+        | ELEMENT 
+;
+
+ELEMENT ::= LETR
+         | DIGITO
+         | ASCII
+         | SPECHAR
+;
+
+DECLAREGEX ::=
+    IDENT ASIGN regex PTCOMA
+;
+
+regex ::= LETR {:System.out.println("Regex");:}
+;
+
+PRUEBAREGEX ::= PRUEBAREGEX declaracion PTCOMA
+            |declaracion PTCOMA   
+;
+
+declaracion ::=IDENT DOSPTO CADENA{:System.out.println("JSON");:};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

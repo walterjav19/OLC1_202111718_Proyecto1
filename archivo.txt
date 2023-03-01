@@ -1,14 +1,21 @@
 {
 /////CONJUNTOS
 
-CONJ: letra -> a~z;
-CONJ: digito -> 0~9;
+CONJ: conjunto1 -> 0~9;
+CONJ: conjunto2 -> a~b;
+CONJ: conjunto3 -> !~&;
+CONJ: conjunto4 -> 1,2,3,4;
+
 
 ////EXRESIONES REGULARES
 
 
+ExpReg1 -> a;
+Regex -> c;
 
+%%
 
-
+ExpReg1 :  "3456.78";
+ExpReg3 :  "PIPI";
 
 }

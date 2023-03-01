@@ -11,6 +11,7 @@ import java.util.List;
     //Codigo de usuario en sintaxis java
     //Agregar clases variables arreglos tc
     public List<Errores.ErrorLexico> ErroresLexicos = new ArrayList<Errores.ErrorLexico>();
+    public List<Symbol> Tokens = new ArrayList<Symbol>();
 %}
 
 
@@ -38,9 +39,11 @@ letras=[a-zA-Z_]+
 digito=[0-9]
 letra=[a-zA-Z]
 any=[^!]
-
+as=[!-/] | [:-@] | [\[-`] | [\{-\}]
+cadena="\"" [^\"]* "\""
 LineTerminator= \r|\n|\r\n
 InputCharacter=[^\r\n]
+spe="\\""n" | "\\""\'" | "\\""\""
 
 comentariosimple="//" {InputCharacter}* {LineTerminator}?
 comentariomultilinea="<!" {any}* "!>"
@@ -52,8 +55,6 @@ comentariomultilinea="<!" {any}* "!>"
 {letras}({letras}|{D})* {return new Symbol(sym.IDENT,yyline,yychar, yytext());}
 {digito} {return new Symbol(sym.DIGITO,yyline,yychar, yytext());}
 
-
-
 ";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());}
 ":" {return new Symbol(sym.DOSPTO,yyline,yychar, yytext());}
 "~" {return new Symbol(sym.VIRG,yyline,yychar, yytext());}
@@ -64,14 +65,18 @@ comentariomultilinea="<!" {any}* "!>"
 "{" {return new Symbol(sym.BRAIZQ,yyline,yychar, yytext());}
 "}" {return new Symbol(sym.BRADER,yyline,yychar, yytext());}
 "->" {return new Symbol(sym.ASIGN,yyline,yychar, yytext());}
-"%"  {return new Symbol(sym.PERCEN,yyline,yychar, yytext());}
+"%%"  {return new Symbol(sym.PERCEN,yyline,yychar, yytext());}
 "."  {return new Symbol(sym.CONCAT,yyline,yychar, yytext());}
 "|"  {return new Symbol(sym.DIS,yyline,yychar, yytext());}
 "*" {return new Symbol(sym.KLE,yyline,yychar, yytext());} 
 "+" {return new Symbol(sym.MAS,yyline,yychar, yytext());} 
 "?" {return new Symbol(sym.INTER,yyline,yychar, yytext());}
+"," {return new Symbol(sym.COMA,yyline,yychar, yytext());}
+\" {return new Symbol(sym.COM,yyline,yychar, yytext());}
+{spe} {return new Symbol(sym.SPECHAR,yyline,yychar, yytext());} 
+{as} {return new Symbol(sym.ASCII,yyline,yychar, yytext());}
+{cadena} {return new Symbol(sym.CADENA,yyline,yychar, yytext());}
 
-\" {return new Symbol(sym.COM,yyline,yychar, yytext());} 
 
 \n {yychar=0;}
 \t {yychar=yychar+4;}

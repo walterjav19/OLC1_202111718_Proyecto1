@@ -9,27 +9,31 @@ package Analizadores;
 public class sym {
   /* terminals */
   public static final int BRADER = 9;
+  public static final int SPECHAR = 27;
   public static final int IDENT = 12;
-  public static final int CONJUNTO = 24;
-  public static final int DECIMAL = 23;
+  public static final int CADENA = 26;
+  public static final int CONJUNTO = 25;
+  public static final int DECIMAL = 24;
   public static final int PARIZQ = 5;
-  public static final int CONCAT = 17;
+  public static final int CONCAT = 18;
   public static final int COM = 11;
   public static final int PARDER = 6;
   public static final int PERCEN = 14;
   public static final int LETR = 15;
   public static final int ASIGN = 13;
+  public static final int COMA = 28;
   public static final int EOF = 0;
   public static final int VIRG = 4;
   public static final int DIGITO = 16;
-  public static final int DIS = 18;
+  public static final int DIS = 19;
   public static final int error = 1;
   public static final int CORIZQ = 7;
-  public static final int ENTERO = 22;
-  public static final int INTER = 21;
+  public static final int ASCII = 17;
+  public static final int ENTERO = 23;
+  public static final int INTER = 22;
   public static final int CORDER = 8;
-  public static final int KLE = 19;
-  public static final int MAS = 20;
+  public static final int KLE = 20;
+  public static final int MAS = 21;
   public static final int DOSPTO = 3;
   public static final int PTCOMA = 2;
   public static final int BRAIZQ = 10;
@@ -51,6 +55,7 @@ public class sym {
   "PERCEN",
   "LETR",
   "DIGITO",
+  "ASCII",
   "CONCAT",
   "DIS",
   "KLE",
@@ -58,7 +63,10 @@ public class sym {
   "INTER",
   "ENTERO",
   "DECIMAL",
-  "CONJUNTO"
+  "CONJUNTO",
+  "CADENA",
+  "SPECHAR",
+  "COMA"
   };
 }
 
