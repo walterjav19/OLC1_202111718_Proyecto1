@@ -4,8 +4,8 @@
  */
 package com.mycompany.proyecto1_olc1;
 
+import Analizadores.sym;
 import Errores.ErrorLexico;
-import static Errores.ErrorLexico.escribir;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,8 +13,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
+import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -268,7 +268,20 @@ public static void escribir(String path,String TextField2){
             Analizadores.Lexico lex=new Analizadores.Lexico(new FileReader("archivo.txt"));
             pars=new Analizadores.Sintactico(lex);
             pars.parse();
-            
+            System.out.println("TokenID  Token              Linea Columna Valor");
+            for(Symbol tok : lex.T_SIMBOLOS) {
+                String tokenName = sym.terminalNames[tok.sym];
+                String tokenValue = (tok.value != null) ? tok.value.toString() : "";
+                System.out.format("%-9d%-20s%-6d%-8d%-20s\n", tok.sym, tokenName, tok.left, tok.right, tokenValue);
+            }
+            for (Map.Entry<String, String> entrada : pars.conjuntos.entrySet()) {
+            // Obtener la llave y el valor asociado a la entrada actual
+            String llave = entrada.getKey();
+            String valor = entrada.getValue();
+
+            // Imprimir el nombre del conjunto y su valor asociado
+            System.out.println("Conjunto: " + llave + ", Valor: " + valor);
+            }
             if (lex.ErroresLexicos.size()!=0){
                 JOptionPane.showMessageDialog(null, "Hay errores Lexicos en la Compilacion del Programa revise la carpeta de errores","Errores Lexicos",JOptionPane.INFORMATION_MESSAGE);
                 GenerarHtml(lex.ErroresLexicos);

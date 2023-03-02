@@ -3,7 +3,8 @@ package Analizadores;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
 /* 2. Codigo para el parser, variables, metodos */
 parser code 
 {:
@@ -30,6 +31,10 @@ parser code
     
     //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
     public List<String> resultados = new ArrayList<String>();
+    public HashMap<String, String> conjuntos = new HashMap<String, String>();
+    public HashMap<String, String> expresiones = new HashMap<String, String>();
+
+
 :} 
 
 /* 3. Terminales */
@@ -38,8 +43,6 @@ terminal String ASIGN,PERCEN;
 terminal String LETR,DIGITO;
 terminal String ASCII;
 terminal String CONCAT,DIS,KLE,MAS,INTER;
-terminal String ENTERO;
-terminal String DECIMAL;
 terminal String CONJUNTO,CADENA;
 terminal String SPECHAR,COMA;
 
@@ -48,12 +51,12 @@ terminal String SPECHAR,COMA;
 non terminal ini;
 non terminal instrucciones;
 non terminal instruccion;
-non terminal conjus;
-non terminal Double expresion;
+non terminal String conjus;
 non terminal DECLACONJUN,DECLAREGEX,PRUEBAREGEX;
-non terminal regex,declaracion;
-non terminal DEFVIR,DEFCOM;
-non terminal ELEMENT;
+non terminal declaracion;
+non terminal String regex;
+non terminal String DEFVIR,DEFCOM;
+non terminal String ELEMENT;
 /* 5. Precedencias */
 //precedence left MAS,MENOS;
 //precedence left POR,DIVIDIDO;
@@ -76,43 +79,69 @@ instruccion ::=
 ;
 
 
-DECLACONJUN ::= CONJUNTO DOSPTO IDENT ASIGN conjus PTCOMA 
+DECLACONJUN ::= CONJUNTO DOSPTO IDENT:a ASIGN conjus:b PTCOMA
+{:
+conjuntos.put(a,b);
+:} 
 ;
 
 
-conjus ::= DEFVIR
-        | DEFCOM
+conjus ::= DEFVIR:a {:RESULT=a;:}
+        | DEFCOM:a {:RESULT="["+a+"]";:}
 
 ;
 
-DEFVIR ::= LETR VIRG LETR {:System.out.println("CONJUNTO DE LETRAS ");:}
-            | DIGITO VIRG DIGITO {:System.out.println("CONJUNTO DE Digitos");:}
-            | ASCII:a VIRG ASCII:b {:RESULT=a;System.out.println("Conjunto de ascii");:}
+DEFVIR ::= LETR:a VIRG LETR:b {:RESULT="["+a+"-"+b+"]";:}
+            | DIGITO:a VIRG DIGITO:b {:RESULT="["+a+"-"+b+"]";:}
+            | ASCII:a VIRG ASCII:b {:RESULT="["+a+"-"+b+"]";:}
 ;
 
 DEFCOM ::= 
-        DEFCOM COMA ELEMENT 
-        | ELEMENT 
+    DEFCOM:a COMA ELEMENT:b {:RESULT = (a != null ? a : "") + b;:}  
+    | ELEMENT:b {:RESULT = "" + b;:}
 ;
 
-ELEMENT ::= LETR
-         | DIGITO
-         | ASCII
-         | SPECHAR
+ELEMENT ::= LETR:a{:RESULT=a;:}
+         | DIGITO:a{:RESULT=a;:}
+         | ASCII:a{:RESULT=a;:}
+         | SPECHAR:a{:RESULT=a;:}
 ;
 
 DECLAREGEX ::=
-    IDENT ASIGN regex PTCOMA
+    IDENT:a ASIGN regex:b PTCOMA {:if (b.contains("null")){
+                                    System.out.println("La Expresion regular con nombre "+a+" tiene conjuntos no definidos");
+                                   }else{
+                                        //se agrega a nuestras expresiones valida
+                                        expresiones.put(a,b);
+                                        System.out.println("Identificador "+a+" Expresion: "+b);
+
+                                   }:}
 ;
 
-regex ::= LETR {:System.out.println("Regex");:}
+regex ::= CONCAT:c regex:a regex:b {:RESULT=c+a+b;:}
+        | DIS:c regex:a regex:b {:RESULT=c+a+b;:}
+        | KLE:c regex:a {:RESULT=c+a;:}
+        | MAS:c regex:a {:RESULT=c+a;:}
+        | INTER:c regex:a {:RESULT=c+a;:}
+        | BRAIZQ:a IDENT:c BRADER:b {:for (Map.Entry<String, String> entrada : conjuntos.entrySet()) {
+            // Obtener la llave y el valor asociado a la entrada actual
+            String llave = entrada.getKey();
+            String valor = entrada.getValue();
+            if (c.equals(llave)){
+                //si existe el conjunto
+                RESULT=a+c+b;
+            }
+            }
+            
+            :}
+        | CADENA:a {:RESULT=a;:}
 ;
 
 PRUEBAREGEX ::= PRUEBAREGEX declaracion PTCOMA
             |declaracion PTCOMA   
 ;
 
-declaracion ::=IDENT DOSPTO CADENA{:System.out.println("JSON");:};
+declaracion ::=IDENT DOSPTO CADENA{::};
 
 
 

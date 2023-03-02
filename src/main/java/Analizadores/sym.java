@@ -9,11 +9,10 @@ package Analizadores;
 public class sym {
   /* terminals */
   public static final int BRADER = 9;
-  public static final int SPECHAR = 27;
+  public static final int SPECHAR = 25;
   public static final int IDENT = 12;
-  public static final int CADENA = 26;
-  public static final int CONJUNTO = 25;
-  public static final int DECIMAL = 24;
+  public static final int CADENA = 24;
+  public static final int CONJUNTO = 23;
   public static final int PARIZQ = 5;
   public static final int CONCAT = 18;
   public static final int COM = 11;
@@ -21,7 +20,7 @@ public class sym {
   public static final int PERCEN = 14;
   public static final int LETR = 15;
   public static final int ASIGN = 13;
-  public static final int COMA = 28;
+  public static final int COMA = 26;
   public static final int EOF = 0;
   public static final int VIRG = 4;
   public static final int DIGITO = 16;
@@ -29,7 +28,6 @@ public class sym {
   public static final int error = 1;
   public static final int CORIZQ = 7;
   public static final int ASCII = 17;
-  public static final int ENTERO = 23;
   public static final int INTER = 22;
   public static final int CORDER = 8;
   public static final int KLE = 20;
@@ -61,8 +59,6 @@ public class sym {
   "KLE",
   "MAS",
   "INTER",
-  "ENTERO",
-  "DECIMAL",
   "CONJUNTO",
   "CADENA",
   "SPECHAR",

@@ -3,6 +3,8 @@
 /*package e importaciones*/
 
 package Analizadores;
+
+
 import java_cup.runtime.Symbol;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
  * from the specification file <tt>src/main/java/Analizadores/Lexer.jflex</tt>
  */
 public class Lexico implements java_cup.runtime.Scanner {
+
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -65,12 +68,12 @@ public class Lexico implements java_cup.runtime.Scanner {
     "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
     "\1\10\1\11\1\12\1\13\1\14\3\11\1\10\1\15"+
     "\1\16\1\17\1\20\1\21\1\22\1\23\1\24\2\11"+
-    "\1\25\1\26\1\27\1\30\1\31\2\0\1\32\1\33"+
-    "\1\34\1\0\1\7\1\35\1\36\1\37\2\34\1\0"+
-    "\1\7\1\40\1\41";
+    "\1\25\1\26\1\27\1\30\1\0\1\31\1\32\1\33"+
+    "\1\0\1\7\1\34\1\35\2\33\1\0\1\7\1\36"+
+    "\1\37";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[48];
+    int [] result = new int[45];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -95,15 +98,15 @@ public class Lexico implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\47\0\116\0\165\0\47\0\47\0\116\0\234"+
-    "\0\234\0\47\0\47\0\303\0\47\0\352\0\u0111\0\u0138"+
-    "\0\u015f\0\47\0\47\0\47\0\47\0\47\0\47\0\47"+
-    "\0\47\0\u0186\0\u01ad\0\47\0\47\0\47\0\47\0\165"+
-    "\0\u01d4\0\303\0\47\0\47\0\u01fb\0\u0222\0\u0249\0\47"+
-    "\0\47\0\u01d4\0\u0270\0\47\0\u0297\0\u02be\0\47\0\234";
+    "\0\0\0\47\0\116\0\47\0\47\0\47\0\116\0\165"+
+    "\0\165\0\47\0\47\0\234\0\47\0\303\0\352\0\u0111"+
+    "\0\u0138\0\47\0\47\0\47\0\47\0\47\0\47\0\47"+
+    "\0\47\0\u015f\0\u0186\0\47\0\47\0\47\0\47\0\234"+
+    "\0\47\0\47\0\u01ad\0\u01d4\0\u01fb\0\47\0\47\0\u0222"+
+    "\0\47\0\u0249\0\u0270\0\47\0\165";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[48];
+    int [] result = new int[45];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -131,19 +134,18 @@ public class Lexico implements java_cup.runtime.Scanner {
     "\1\17\1\20\1\12\1\21\3\11\1\22\1\23\1\24"+
     "\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34"+
     "\1\35\1\36\1\37\51\0\1\7\3\0\1\7\6\0"+
-    "\1\7\34\0\1\40\1\41\45\0\1\10\3\0\2\10"+
-    "\7\0\1\10\4\0\4\10\17\0\13\42\1\43\33\42"+
-    "\13\0\1\44\3\0\2\44\47\0\1\45\35\0\1\46"+
-    "\40\0\1\10\3\0\2\10\7\0\1\10\4\0\1\10"+
-    "\1\47\2\10\42\0\1\50\64\0\1\51\7\0\1\52"+
-    "\1\0\2\52\41\0\14\45\1\53\1\54\31\45\10\46"+
-    "\1\55\36\46\2\0\1\10\3\0\2\10\7\0\1\10"+
-    "\4\0\2\10\1\56\1\10\34\0\1\54\54\0\1\57"+
-    "\25\0\1\10\3\0\2\10\7\0\1\10\4\0\3\10"+
-    "\1\60\17\0";
+    "\1\7\34\0\1\10\3\0\2\10\7\0\1\10\4\0"+
+    "\4\10\17\0\13\40\1\41\33\40\13\0\1\42\3\0"+
+    "\2\42\47\0\1\43\35\0\1\44\40\0\1\10\3\0"+
+    "\2\10\7\0\1\10\4\0\1\10\1\45\2\10\42\0"+
+    "\1\46\64\0\1\47\5\0\14\43\1\50\1\51\31\43"+
+    "\10\44\1\52\36\44\2\0\1\10\3\0\2\10\7\0"+
+    "\1\10\4\0\2\10\1\53\1\10\34\0\1\51\54\0"+
+    "\1\54\25\0\1\10\3\0\2\10\7\0\1\10\4\0"+
+    "\3\10\1\55\17\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[741];
+    int [] result = new int[663];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -181,13 +183,12 @@ public class Lexico implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\2\1\2\11\3\1\2\11\1\1\1\11"+
-    "\4\1\10\11\2\1\4\11\1\1\2\0\2\11\1\1"+
-    "\1\0\1\1\2\11\2\1\1\11\1\0\1\1\1\11"+
-    "\1\1";
+    "\1\0\1\11\1\1\3\11\3\1\2\11\1\1\1\11"+
+    "\4\1\10\11\2\1\4\11\1\0\2\11\1\1\1\0"+
+    "\1\1\2\11\1\1\1\11\1\0\1\1\1\11\1\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[48];
+    int [] result = new int[45];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -266,8 +267,7 @@ public class Lexico implements java_cup.runtime.Scanner {
     //Codigo de usuario en sintaxis java
     //Agregar clases variables arreglos tc
     public List<Errores.ErrorLexico> ErroresLexicos = new ArrayList<Errores.ErrorLexico>();
-    public List<Symbol> Tokens = new ArrayList<Symbol>();
-
+    public List<Symbol> T_SIMBOLOS = new ArrayList<Symbol>();
 
   /**
    * Creates a new scanner
@@ -644,167 +644,207 @@ public class Lexico implements java_cup.runtime.Scanner {
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "+yyline+", en la columna: "+yychar);
             } 
             // fall through
-          case 34: break;
+          case 32: break;
           case 2: 
             { yychar=yychar+4;
             } 
             // fall through
-          case 35: break;
+          case 33: break;
           case 3: 
-            { return new Symbol(sym.DIGITO,yyline,yychar, yytext());
+            { Symbol s = new Symbol(sym.DIGITO,yyline,yychar, yytext());
+         T_SIMBOLOS.add(s);
+         return new Symbol(sym.DIGITO,yyline,yychar, yytext());
+            } 
+            // fall through
+          case 34: break;
+          case 4: 
+            { Symbol s = new Symbol(sym.CONCAT,yyline,yychar, yytext());
+     T_SIMBOLOS.add(s);
+     return new Symbol(sym.CONCAT,yyline,yychar, yytext());
+            } 
+            // fall through
+          case 35: break;
+          case 5: 
+            { Symbol s = new Symbol(sym.DIS,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.DIS,yyline,yychar, yytext());
             } 
             // fall through
           case 36: break;
-          case 4: 
-            { return new Symbol(sym.CONCAT,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 37: break;
-          case 5: 
-            { return new Symbol(sym.DIS,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 38: break;
           case 6: 
             { /*Ignorar Espacios en Blanco*/
             } 
             // fall through
-          case 39: break;
+          case 37: break;
           case 7: 
-            { return new Symbol(sym.IDENT,yyline,yychar, yytext());
+            { Symbol s = new Symbol(sym.IDENT,yyline,yychar, yytext());
+                        T_SIMBOLOS.add(s);
+                        return new Symbol(sym.IDENT,yyline,yychar, yytext());
+            } 
+            // fall through
+          case 38: break;
+          case 8: 
+            { Symbol s = new Symbol(sym.LETR,yyline,yychar, yytext());
+        T_SIMBOLOS.add(s);
+        return new Symbol(sym.LETR,yyline,yychar, yytext());
+            } 
+            // fall through
+          case 39: break;
+          case 9: 
+            { Symbol s = new Symbol(sym.ASCII,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.ASCII,yyline,yychar, yytext());
             } 
             // fall through
           case 40: break;
-          case 8: 
-            { return new Symbol(sym.LETR,yyline,yychar, yytext());
+          case 10: 
+            { Symbol s = new Symbol(sym.BRADER,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.BRADER,yyline,yychar, yytext());
             } 
             // fall through
           case 41: break;
-          case 9: 
-            { return new Symbol(sym.ASCII,yyline,yychar, yytext());
+          case 11: 
+            { Symbol s = new Symbol(sym.COM,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.COM,yyline,yychar, yytext());
             } 
             // fall through
           case 42: break;
-          case 10: 
-            { return new Symbol(sym.BRADER,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 43: break;
-          case 11: 
-            { return new Symbol(sym.COM,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 44: break;
           case 12: 
             { yychar=0;
             } 
             // fall through
-          case 45: break;
+          case 43: break;
           case 13: 
-            { return new Symbol(sym.PTCOMA,yyline,yychar, yytext());
+            { Symbol s = new Symbol(sym.PTCOMA,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.PTCOMA,yyline,yychar, yytext());
+            } 
+            // fall through
+          case 44: break;
+          case 14: 
+            { Symbol s = new Symbol(sym.DOSPTO,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.DOSPTO,yyline,yychar, yytext());
+            } 
+            // fall through
+          case 45: break;
+          case 15: 
+            { Symbol s = new Symbol(sym.VIRG,yyline,yychar, yytext());
+     T_SIMBOLOS.add(s);
+     return new Symbol(sym.VIRG,yyline,yychar, yytext());
             } 
             // fall through
           case 46: break;
-          case 14: 
-            { return new Symbol(sym.DOSPTO,yyline,yychar, yytext());
+          case 16: 
+            { Symbol s = new Symbol(sym.PARIZQ,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.PARIZQ,yyline,yychar, yytext());
             } 
             // fall through
           case 47: break;
-          case 15: 
-            { return new Symbol(sym.VIRG,yyline,yychar, yytext());
+          case 17: 
+            { Symbol s = new Symbol(sym.PARDER,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.PARDER,yyline,yychar, yytext());
             } 
             // fall through
           case 48: break;
-          case 16: 
-            { return new Symbol(sym.PARIZQ,yyline,yychar, yytext());
+          case 18: 
+            { Symbol s = new Symbol(sym.CORIZQ,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.CORIZQ,yyline,yychar, yytext());
             } 
             // fall through
           case 49: break;
-          case 17: 
-            { return new Symbol(sym.PARDER,yyline,yychar, yytext());
+          case 19: 
+            { Symbol s = new Symbol(sym.CORDER,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.CORDER,yyline,yychar, yytext());
             } 
             // fall through
           case 50: break;
-          case 18: 
-            { return new Symbol(sym.CORIZQ,yyline,yychar, yytext());
+          case 20: 
+            { Symbol s = new Symbol(sym.BRAIZQ,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.BRAIZQ,yyline,yychar, yytext());
             } 
             // fall through
           case 51: break;
-          case 19: 
-            { return new Symbol(sym.CORDER,yyline,yychar, yytext());
+          case 21: 
+            { Symbol s = new Symbol(sym.KLE,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.KLE,yyline,yychar, yytext());
             } 
             // fall through
           case 52: break;
-          case 20: 
-            { return new Symbol(sym.BRAIZQ,yyline,yychar, yytext());
+          case 22: 
+            { Symbol s = new Symbol(sym.MAS,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.MAS,yyline,yychar, yytext());
             } 
             // fall through
           case 53: break;
-          case 21: 
-            { return new Symbol(sym.KLE,yyline,yychar, yytext());
+          case 23: 
+            { Symbol s = new Symbol(sym.INTER,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.INTER,yyline,yychar, yytext());
             } 
             // fall through
           case 54: break;
-          case 22: 
-            { return new Symbol(sym.MAS,yyline,yychar, yytext());
+          case 24: 
+            { Symbol s = new Symbol(sym.COMA,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.COMA,yyline,yychar, yytext());
             } 
             // fall through
           case 55: break;
-          case 23: 
-            { return new Symbol(sym.INTER,yyline,yychar, yytext());
+          case 25: 
+            { Symbol s = new Symbol(sym.CADENA,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.CADENA,yyline,yychar, yytext());
             } 
             // fall through
           case 56: break;
-          case 24: 
-            { return new Symbol(sym.COMA,yyline,yychar, yytext());
+          case 26: 
+            { Symbol s = new Symbol(sym.SPECHAR,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.SPECHAR,yyline,yychar, yytext());
             } 
             // fall through
           case 57: break;
-          case 25: 
-            { return new Symbol(sym.ENTERO,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 58: break;
-          case 26: 
-            { return new Symbol(sym.CADENA,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 59: break;
           case 27: 
-            { return new Symbol(sym.SPECHAR,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 60: break;
-          case 28: 
             { /*Ignorar Espacios Comentarios*/
             } 
             // fall through
-          case 61: break;
+          case 58: break;
+          case 28: 
+            { Symbol s = new Symbol(sym.ASIGN,yyline,yychar, yytext());
+    T_SIMBOLOS.add(s);
+    return new Symbol(sym.ASIGN,yyline,yychar, yytext());
+            } 
+            // fall through
+          case 59: break;
           case 29: 
-            { return new Symbol(sym.ASIGN,yyline,yychar, yytext());
+            { Symbol s = new Symbol(sym.PERCEN,yyline,yychar, yytext());
+      T_SIMBOLOS.add(s);
+      return new Symbol(sym.PERCEN,yyline,yychar, yytext());
             } 
             // fall through
-          case 62: break;
+          case 60: break;
           case 30: 
-            { return new Symbol(sym.PERCEN,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 63: break;
-          case 31: 
-            { return new Symbol(sym.DECIMAL,yyline,yychar, yytext());
-            } 
-            // fall through
-          case 64: break;
-          case 32: 
             { /*Ignorar Espacios*/
             } 
             // fall through
-          case 65: break;
-          case 33: 
-            { return new Symbol(sym.CONJUNTO,yyline,yychar,yytext());
+          case 61: break;
+          case 31: 
+            { Symbol s = new Symbol(sym.CONJUNTO,yyline,yychar, yytext());
+        T_SIMBOLOS.add(s);
+        return new Symbol(sym.CONJUNTO,yyline,yychar,yytext());
             } 
             // fall through
-          case 66: break;
+          case 62: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
