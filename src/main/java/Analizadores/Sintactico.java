@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import Estructuras.NodeArbol;
+import Estructuras.Expresiones;
+import Estructuras.Arbol;
+import java.util.LinkedList;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -198,11 +202,12 @@ public class Sintactico extends java_cup.runtime.lr_parser {
 
 
     //Clases, objetos, variables, lista, etc... en sintaxis java
-    
+    public int conthojas=0;
+
     //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
     public List<String> resultados = new ArrayList<String>();
     public HashMap<String, String> conjuntos = new HashMap<String, String>();
-    public HashMap<String, String> expresiones = new HashMap<String, String>();
+    public HashMap<String, Arbol> expresiones = new HashMap<String, Arbol>();
 
 
 
@@ -466,14 +471,14 @@ conjuntos.put(a,b);
 		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		NodeArbol b = (NodeArbol)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		
-                                   if (b.contains("null")){
+                                   if (b==null){
                                     resultados.add("La Expresion regular con nombre "+a+" tiene conjuntos no definidos");
                                     System.out.println("La Expresion regular con nombre "+a+" tiene conjuntos no definidos");
                                    }else{
                                         //se agrega a nuestras expresiones valida
-                                        expresiones.put(a,b);
+                                        expresiones.put(a,new Arbol(b));
                                         System.out.println("Identificador "+a+" Expresion: "+b);
 
                                    }
@@ -484,17 +489,18 @@ conjuntos.put(a,b);
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // regex ::= CONCAT regex regex 
             {
-              String RESULT =null;
+              NodeArbol RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		NodeArbol a = (NodeArbol)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT=a+b;
+		NodeArbol b = (NodeArbol)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		if (a!=null && b!=null){
+                                    RESULT=new NodeArbol(c, "", -1, a, b);}
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("regex",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -502,17 +508,18 @@ conjuntos.put(a,b);
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 21: // regex ::= DIS regex regex 
             {
-              String RESULT =null;
+              NodeArbol RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		NodeArbol a = (NodeArbol)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
-		String b = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT="("+a+c+b+")";
+		NodeArbol b = (NodeArbol)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		if (a!=null && b!=null){
+                                  RESULT=new NodeArbol(c, "", -1, a, b);}
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("regex",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -520,14 +527,15 @@ conjuntos.put(a,b);
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 22: // regex ::= KLE regex 
             {
-              String RESULT =null;
+              NodeArbol RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT=a+c;
+		NodeArbol a = (NodeArbol)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		if (a!=null){
+                          RESULT=new NodeArbol(c, "", -1, a, null);}
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("regex",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -535,14 +543,15 @@ conjuntos.put(a,b);
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 23: // regex ::= MAS regex 
             {
-              String RESULT =null;
+              NodeArbol RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT=a+c;
+		NodeArbol a = (NodeArbol)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		if (a!=null){
+                          RESULT=new NodeArbol(c, "", -1, a, null);}
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("regex",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -550,14 +559,15 @@ conjuntos.put(a,b);
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 24: // regex ::= INTER regex 
             {
-              String RESULT =null;
+              NodeArbol RESULT =null;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
-		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT=a+c;
+		NodeArbol a = (NodeArbol)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		if (a!=null){
+                            RESULT=new NodeArbol(c, "", -1, a, null);}
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("regex",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -565,7 +575,7 @@ conjuntos.put(a,b);
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 25: // regex ::= BRAIZQ IDENT BRADER 
             {
-              String RESULT =null;
+              NodeArbol RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
@@ -581,7 +591,8 @@ conjuntos.put(a,b);
             String valor = entrada.getValue();
             if (c.equals(llave)){
                 //si existe el conjunto
-                RESULT=valor;
+                RESULT=new NodeArbol(c.toString(),"", parser.conthojas, null, null);
+                parser.conthojas++; 
             }
             }
             
@@ -593,11 +604,12 @@ conjuntos.put(a,b);
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 26: // regex ::= CADENA 
             {
-              String RESULT =null;
+              NodeArbol RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT=a.replaceAll("\"", "");
+		RESULT=new NodeArbol(a.toString(),"", parser.conthojas, null, null);
+                            parser.conthojas++;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("regex",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -605,11 +617,12 @@ conjuntos.put(a,b);
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 27: // regex ::= SPECHAR 
             {
-              String RESULT =null;
+              NodeArbol RESULT =null;
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		RESULT=a;
+		RESULT=new NodeArbol(a,"", parser.conthojas, null, null);
+                            parser.conthojas++;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("regex",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

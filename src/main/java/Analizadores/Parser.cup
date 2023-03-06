@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import Estructuras.NodeArbol;
+import Estructuras.Expresiones;
+import Estructuras.Arbol;
+import java.util.LinkedList;
+
+
+
 /* 2. Codigo para el parser, variables, metodos */
 parser code 
 {:
@@ -28,11 +35,12 @@ parser code
 
 
     //Clases, objetos, variables, lista, etc... en sintaxis java
-    
+    public int conthojas=0;
+
     //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
     public List<String> resultados = new ArrayList<String>();
     public HashMap<String, String> conjuntos = new HashMap<String, String>();
-    public HashMap<String, String> expresiones = new HashMap<String, String>();
+    public HashMap<String, Arbol> expresiones = new HashMap<String, Arbol>();
 
 
 :} 
@@ -54,7 +62,7 @@ non terminal instruccion;
 non terminal String conjus;
 non terminal DECLACONJUN,DECLAREGEX,PRUEBAREGEX;
 non terminal declaracion;
-non terminal String regex;
+non terminal NodeArbol regex;
 non terminal String DEFVIR,DEFCOM;
 non terminal String ELEMENT;
 /* 5. Precedencias */
@@ -108,35 +116,43 @@ ELEMENT ::= LETR:a{:RESULT=a;:}
 
 DECLAREGEX ::=
     IDENT:a ASIGN regex:b PTCOMA {:
-                                   if (b.contains("null")){
+                                   if (b==null){
                                     resultados.add("La Expresion regular con nombre "+a+" tiene conjuntos no definidos");
                                     System.out.println("La Expresion regular con nombre "+a+" tiene conjuntos no definidos");
                                    }else{
                                         //se agrega a nuestras expresiones valida
-                                        expresiones.put(a,b);
+                                        expresiones.put(a,new Arbol(b));
                                         System.out.println("Identificador "+a+" Expresion: "+b);
 
                                    }:}
 ;
 
-regex ::= CONCAT:c regex:a regex:b {:RESULT=a+b;:}
-        | DIS:c regex:a regex:b {:RESULT="("+a+c+b+")";:}
-        | KLE:c regex:a {:RESULT=a+c;:}
-        | MAS:c regex:a {:RESULT=a+c;:}
-        | INTER:c regex:a {:RESULT=a+c;:}
+regex ::= CONCAT:c regex:a regex:b {:if (a!=null && b!=null){
+                                    RESULT=new NodeArbol(c, "", -1, a, b);}:}
+        | DIS:c regex:a regex:b {:if (a!=null && b!=null){
+                                  RESULT=new NodeArbol(c, "", -1, a, b);}:}
+        | KLE:c regex:a {:if (a!=null){
+                          RESULT=new NodeArbol(c, "", -1, a, null);}:}
+        | MAS:c regex:a {:if (a!=null){
+                          RESULT=new NodeArbol(c, "", -1, a, null);}:}
+        | INTER:c regex:a {:if (a!=null){
+                            RESULT=new NodeArbol(c, "", -1, a, null);}:}
         | BRAIZQ:a IDENT:c BRADER:b {:for (Map.Entry<String, String> entrada : conjuntos.entrySet()) {
             // Obtener la llave y el valor asociado a la entrada actual
             String llave = entrada.getKey();
             String valor = entrada.getValue();
             if (c.equals(llave)){
                 //si existe el conjunto
-                RESULT=valor;
+                RESULT=new NodeArbol(c.toString(),"", parser.conthojas, null, null);
+                parser.conthojas++; 
             }
             }
             
             :}
-        | CADENA:a {:RESULT=a.replaceAll("\"", "");:}
-        | SPECHAR:a{:RESULT=a;:}
+        | CADENA:a {:RESULT=new NodeArbol(a.toString(),"", parser.conthojas, null, null);
+                            parser.conthojas++;:}
+        | SPECHAR:a{:RESULT=new NodeArbol(a,"", parser.conthojas, null, null);
+                            parser.conthojas++;:}
 ;
 
 PRUEBAREGEX ::= PRUEBAREGEX declaracion PTCOMA

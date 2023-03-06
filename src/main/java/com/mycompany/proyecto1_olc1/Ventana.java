@@ -6,6 +6,7 @@ package com.mycompany.proyecto1_olc1;
 
 import Analizadores.sym;
 import Errores.ErrorLexico;
+import Estructuras.Arbol;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -292,6 +293,13 @@ public static void escribir(String path,String TextField2){
             // Imprimir el nombre del conjunto y su valor asociado
             System.out.println("Conjunto: " + llave + ", Valor: " + valor);
             }
+            int i = 0; // inicializas i en 0
+
+            for (Arbol arbol : pars.expresiones.values()) {
+                arbol.GraficarSintactico(i+""); // llamas al metodo GraficarSintactico para el arbol
+                i++; // aumentas el valor de i en 1
+            }
+            
             
             
             for(String linea: pars.resultados ){

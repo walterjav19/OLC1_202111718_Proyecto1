@@ -1,11 +1,14 @@
 {
 CONJ: letra ->a~z;
 CONJ: digito ->0~9;
+CONJ: mayus ->A~Z;
 
 ExpReg1 -> .{letra}*|"_"|{letra}{digito};
-ExpresionReg2 -> .+{digito}."."+{digito};
+ExpresionReg2 -> .+{digito}."."+{digito}; 
+ExpRegu -> *{mayus};
 Regex3 -> .{digito}*|"_"|{letra}{digito};
-Regex4->.\'.{letra}\';
+regexJavier -> .."hola" " " "Mundo";
+
 
 
 %%
