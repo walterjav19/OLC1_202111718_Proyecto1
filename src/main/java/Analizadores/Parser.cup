@@ -11,19 +11,19 @@ parser code
     /**
      * Método al que se llama automáticamente ante algún error sintactico.
      **/ 
-    public void syntax_error(Symbol s){ 
-        System.out.println("Error Sintáctico en la Línea " + (s.left) +
-        " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+    public void syntax_error(Symbol s){
+        resultados.add("Error Sintáctico en la Línea " + (s.left) +
+        " Columna "+s.right+ ". No se esperaba este componente: " +s.value);
     } 
 
     /**
      * Método al que se llama automáticamente ante algún error sintáctico 
      * en el que ya no es posible una recuperación de errores.
      **/ 
-    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
-        System.out.println("Error síntactico irrecuperable en la Línea " + 
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        resultados.add("Error síntactico irrecuperable en la Línea " + 
         (s.left)+ " Columna "+s.right+". Componente " + s.value + 
-        " no reconocido."); 
+        " no reconocido");
     }  
 
 
@@ -38,13 +38,13 @@ parser code
 :} 
 
 /* 3. Terminales */
-terminal String PTCOMA,DOSPTO,VIRG,PARIZQ,PARDER,CORIZQ,CORDER,BRADER,BRAIZQ,COM,IDENT;
+terminal String PTCOMA,DOSPTO,VIRG,BRADER,BRAIZQ,IDENT;
 terminal String ASIGN,PERCEN;
 terminal String LETR,DIGITO;
 terminal String ASCII;
 terminal String CONCAT,DIS,KLE,MAS,INTER;
 terminal String CONJUNTO,CADENA;
-terminal String SPECHAR,COMA;
+terminal String SPECHAR,COMA,COM;
 
 
 /* 4. No Terminales */
@@ -104,11 +104,12 @@ DEFCOM ::=
 ELEMENT ::= LETR:a{:RESULT=a;:}
          | DIGITO:a{:RESULT=a;:}
          | ASCII:a{:RESULT=a;:}
-         | SPECHAR:a{:RESULT=a;:}
 ;
 
 DECLAREGEX ::=
-    IDENT:a ASIGN regex:b PTCOMA {:if (b.contains("null")){
+    IDENT:a ASIGN regex:b PTCOMA {:
+                                   if (b.contains("null")){
+                                    resultados.add("La Expresion regular con nombre "+a+" tiene conjuntos no definidos");
                                     System.out.println("La Expresion regular con nombre "+a+" tiene conjuntos no definidos");
                                    }else{
                                         //se agrega a nuestras expresiones valida
@@ -118,23 +119,24 @@ DECLAREGEX ::=
                                    }:}
 ;
 
-regex ::= CONCAT:c regex:a regex:b {:RESULT=c+a+b;:}
-        | DIS:c regex:a regex:b {:RESULT=c+a+b;:}
-        | KLE:c regex:a {:RESULT=c+a;:}
-        | MAS:c regex:a {:RESULT=c+a;:}
-        | INTER:c regex:a {:RESULT=c+a;:}
+regex ::= CONCAT:c regex:a regex:b {:RESULT=a+b;:}
+        | DIS:c regex:a regex:b {:RESULT="("+a+c+b+")";:}
+        | KLE:c regex:a {:RESULT=a+c;:}
+        | MAS:c regex:a {:RESULT=a+c;:}
+        | INTER:c regex:a {:RESULT=a+c;:}
         | BRAIZQ:a IDENT:c BRADER:b {:for (Map.Entry<String, String> entrada : conjuntos.entrySet()) {
             // Obtener la llave y el valor asociado a la entrada actual
             String llave = entrada.getKey();
             String valor = entrada.getValue();
             if (c.equals(llave)){
                 //si existe el conjunto
-                RESULT=a+c+b;
+                RESULT=valor;
             }
             }
             
             :}
-        | CADENA:a {:RESULT=a;:}
+        | CADENA:a {:RESULT=a.replaceAll("\"", "");:}
+        | SPECHAR:a{:RESULT=a;:}
 ;
 
 PRUEBAREGEX ::= PRUEBAREGEX declaracion PTCOMA

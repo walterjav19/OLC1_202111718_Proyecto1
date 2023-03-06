@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class Proyecto1_OLC1 {
     public static void main(String[] args) {
-        String regex = "[a-z](_|[0-9]|[a-z])*"; // expresión regular a buscar
-        String input = "primer"; // cadena en la que buscar
+        String regex = "\"[a-z]\""; // expresión regular a buscar
+        String input = "\"a\""; // cadena en la que buscar
 
         // Compilar la expresión regular
         Pattern pattern = Pattern.compile(regex);

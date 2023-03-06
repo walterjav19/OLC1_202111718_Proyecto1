@@ -84,26 +84,6 @@ comentariomultilinea="<!" {any}* "!>"
      return new Symbol(sym.VIRG,yyline,yychar, yytext());}
 
 
-"(" {Symbol s = new Symbol(sym.PARIZQ,yyline,yychar, yytext());
-    T_SIMBOLOS.add(s);
-    return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 
-
-
-")" {Symbol s = new Symbol(sym.PARDER,yyline,yychar, yytext());
-    T_SIMBOLOS.add(s);
-    return new Symbol(sym.PARDER,yyline,yychar, yytext());}
-
- 
-"[" {Symbol s = new Symbol(sym.CORIZQ,yyline,yychar, yytext());
-    T_SIMBOLOS.add(s);
-    return new Symbol(sym.CORIZQ,yyline,yychar, yytext());}
-
- 
-"]" {Symbol s = new Symbol(sym.CORDER,yyline,yychar, yytext());
-    T_SIMBOLOS.add(s);
-    return new Symbol(sym.CORDER,yyline,yychar, yytext());}
-
-
 "{" {Symbol s = new Symbol(sym.BRAIZQ,yyline,yychar, yytext());
     T_SIMBOLOS.add(s);
     return new Symbol(sym.BRAIZQ,yyline,yychar, yytext());}

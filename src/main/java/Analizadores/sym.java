@@ -8,46 +8,37 @@ package Analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int BRADER = 9;
-  public static final int SPECHAR = 25;
-  public static final int IDENT = 12;
-  public static final int CADENA = 24;
-  public static final int CONJUNTO = 23;
-  public static final int PARIZQ = 5;
-  public static final int CONCAT = 18;
-  public static final int COM = 11;
-  public static final int PARDER = 6;
-  public static final int PERCEN = 14;
-  public static final int LETR = 15;
-  public static final int ASIGN = 13;
-  public static final int COMA = 26;
+  public static final int BRADER = 5;
+  public static final int SPECHAR = 20;
+  public static final int IDENT = 7;
+  public static final int CADENA = 19;
+  public static final int CONJUNTO = 18;
+  public static final int COM = 22;
+  public static final int CONCAT = 13;
+  public static final int PERCEN = 9;
+  public static final int LETR = 10;
+  public static final int ASIGN = 8;
+  public static final int COMA = 21;
   public static final int EOF = 0;
   public static final int VIRG = 4;
-  public static final int DIGITO = 16;
-  public static final int DIS = 19;
+  public static final int DIGITO = 11;
+  public static final int DIS = 14;
   public static final int error = 1;
-  public static final int CORIZQ = 7;
-  public static final int ASCII = 17;
-  public static final int INTER = 22;
-  public static final int CORDER = 8;
-  public static final int KLE = 20;
-  public static final int MAS = 21;
+  public static final int ASCII = 12;
+  public static final int INTER = 17;
+  public static final int KLE = 15;
   public static final int DOSPTO = 3;
+  public static final int MAS = 16;
   public static final int PTCOMA = 2;
-  public static final int BRAIZQ = 10;
+  public static final int BRAIZQ = 6;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
   "PTCOMA",
   "DOSPTO",
   "VIRG",
-  "PARIZQ",
-  "PARDER",
-  "CORIZQ",
-  "CORDER",
   "BRADER",
   "BRAIZQ",
-  "COM",
   "IDENT",
   "ASIGN",
   "PERCEN",
@@ -62,7 +53,8 @@ public class sym {
   "CONJUNTO",
   "CADENA",
   "SPECHAR",
-  "COMA"
+  "COMA",
+  "COM"
   };
 }
 

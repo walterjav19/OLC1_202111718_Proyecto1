@@ -1,20 +1,16 @@
 {
-/////CONJUNTOS
-
-CONJ: letra -> a~z;
-CONJ: digito -> 0~9;
-CONJ: hola-> a,b,c,d;
-
-////EXRESIONES REGULARES
-
+CONJ: letra ->a~z;
+CONJ: digito ->0~9;
 
 ExpReg1 -> .{letra}*|"_"|{letra}{digito};
-ExpresionReg2 -> .{digito}."."+{digito};
-aas-> *{hola};
+ExpresionReg2 -> .+{digito}."."+{digito};
+Regex3 -> .{digito}*|"_"|{letra}{digito};
+Regex4->.\'.{letra}\';
+
 
 %%
 
-ExpReg1 :  "primerLexemaCocoa";
-ExpresionReg2 :  "34.44";
+ExpReg1:"primerLexemaCocoa";
+ExpresionReg2: "34.44" ;
 
 }
