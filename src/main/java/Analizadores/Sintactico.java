@@ -206,6 +206,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
 
     //Creo una lista de tipo String llamada 'resultados', donde guardare cada uno de los resultados analizados
     public List<String> resultados = new ArrayList<String>();
+    public List<Expresiones> r_json = new ArrayList<Expresiones>();
     public HashMap<String, String> conjuntos = new HashMap<String, String>();
     public HashMap<String, Arbol> expresiones = new HashMap<String, Arbol>();
 
@@ -668,10 +669,22 @@ conjuntos.put(a,b);
                     int lastIndex = a.lastIndexOf("\""); // encuentra la posición del último carácter de comillas dobles
                     String result = a.substring(firstIndex, lastIndex); // extrae solo la porción de la cadena dentro de las comillas
                     result=result.replace("\\n", "\n");
-                    String console=valor.ValidarCadena(result.replace("\\", ""));
+                    Boolean console=valor.ValidarCadena(result.replace("\\", ""));
                     
-                    resultados.add("La expresion: "+a+console+b);
-                    
+
+                    if (console){
+                        resultados.add("La expresion: "+a+" Es Valida con la expresion regular "+b);
+                        Expresiones ex=new Expresiones(a,b,"\"Cadena Valida\"");
+                        System.out.println(ex.jsonify());
+                        r_json.add(ex);
+                        ex.GenerarJson(r_json);
+                    }else{
+                        resultados.add("La expresion: "+a+" No es Valida con la expresion regular "+b);
+                        Expresiones ex=new Expresiones(a,b,"\"Cadena Invalida\"");
+                        System.out.println(ex.jsonify());
+                        r_json.add(ex);
+                        ex.GenerarJson(r_json);
+                    }
                     
                 } else {
                     // la clave no existe en el mapa

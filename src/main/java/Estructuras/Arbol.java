@@ -23,17 +23,17 @@ public class Arbol {
         GenerarDot(grafica, i);
     }
     
-    public String ValidarCadena(String input){
+    public Boolean ValidarCadena(String input){
         // Compilar la expresión regular
         Pattern pattern = Pattern.compile(this.raiz.Expresion);
 
         // Crear un Matcher para buscar la expresión regular en la cadena de entrada
         Matcher matcher = pattern.matcher(input);
         if (matcher.matches()) {
-            return " Es valida con la expresion regular: ";
+            return true;
         }
         
-        return " No es valida con la expresion regular: ";
+        return false;
         
     } 
      
