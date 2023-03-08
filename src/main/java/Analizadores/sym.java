@@ -13,7 +13,6 @@ public class sym {
   public static final int IDENT = 7;
   public static final int CADENA = 19;
   public static final int CONJUNTO = 18;
-  public static final int COM = 22;
   public static final int CONCAT = 13;
   public static final int PERCEN = 9;
   public static final int LETR = 10;
@@ -53,8 +52,7 @@ public class sym {
   "CONJUNTO",
   "CADENA",
   "SPECHAR",
-  "COMA",
-  "COM"
+  "COMA"
   };
 }
 

@@ -285,26 +285,32 @@ public static void escribir(String path,String TextField2){
                 String tokenValue = (tok.value != null) ? tok.value.toString() : "";
                 System.out.format("%-9d%-20s%-6d%-8d%-20s\n", tok.sym, tokenName, tok.left, tok.right, tokenValue);
             }
-            for (Map.Entry<String, String> entrada : pars.conjuntos.entrySet()) {
+            /*for (Map.Entry<String, String> entrada : pars.conjuntos.entrySet()) {
             // Obtener la llave y el valor asociado a la entrada actual
             String llave = entrada.getKey();
             String valor = entrada.getValue();
 
             // Imprimir el nombre del conjunto y su valor asociado
             System.out.println("Conjunto: " + llave + ", Valor: " + valor);
-            }
+            }*/
             int i = 0; // inicializas i en 0
 
             for (Arbol arbol : pars.expresiones.values()) {
+          
                 arbol.GraficarSintactico(i+""); // llamas al metodo GraficarSintactico para el arbol
                 i++; // aumentas el valor de i en 1
             }
             
+
             
             
+            String txt="";
             for(String linea: pars.resultados ){
-                jTextArea2.setText(linea);
+                txt+=linea+"\n";
             }
+            
+            jTextArea2.setText(txt);
+            
             if (lex.ErroresLexicos.size()!=0){
                 JOptionPane.showMessageDialog(null, "Hay errores Lexicos en la Compilacion del Programa revise la carpeta de errores","Errores Lexicos",JOptionPane.INFORMATION_MESSAGE);
                 GenerarHtml(lex.ErroresLexicos);

@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Arbol {
@@ -17,18 +19,33 @@ public class Arbol {
     }
     
      public void GraficarSintactico(String i){
-  
         String grafica = "digraph Arbol_Sintactico{\n\n" + GraficaNodos(this.raiz, "0") + "\n\n}";        
         GenerarDot(grafica, i);
-
     }
     
+    public String ValidarCadena(String input){
+        // Compilar la expresión regular
+        Pattern pattern = Pattern.compile(this.raiz.Expresion);
+
+        // Crear un Matcher para buscar la expresión regular en la cadena de entrada
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.matches()) {
+            return " Es valida con la expresion regular: ";
+        }
+        
+        return " No es valida con la expresion regular: ";
+        
+    } 
+     
+     
     private String GraficaNodos(NodeArbol nodo, String i){
         int k=0; 
         String r = "";
         String nodoTerm = nodo.token;
-     
-        nodoTerm = nodoTerm.replace("\"", "");
+        if(!nodoTerm.equals("\\\\\\\"")){
+           nodoTerm = nodoTerm.replace("\"", "");
+        }
+        
         r= "node" + i + "[label = \"" + nodoTerm + "\"];\n";
    
         for(int j =0 ; j<=nodo.hijos.size()-1; j++){
@@ -40,8 +57,8 @@ public class Arbol {
         
         if( !(nodo.lexema.equals("")) ){
             String nodoToken = nodo.lexema;
-          
-            nodoToken = nodoToken.replace("\"", "");
+            if(!nodoTerm.equals("\\\\\\\"")){
+            nodoToken = nodoToken.replace("\"", "");}
             r += "node" + i + "c[label = \"" + nodoToken + "\"];\n";
             r += "node" + i + " -> node" + i + "c\n";
         }

@@ -34,13 +34,13 @@ import java.util.List;
 //Expresiones Regulares
 BLANCOS=[ \r\t]+
 D=[0-9]+
-DD=[0-9]+("."[  |0-9]+)?
 letras=[a-zA-Z_]+
 digito=[0-9]
 letra=[a-zA-Z]
 any=[^!]
 as=[!-/] | [:-@] | [\[-`] | [\{-\}]
-cadena="\"" [^\"]* "\""
+MENOSCOMILLAS = [^"\\\""]* "\\\""
+cadena="\"" {MENOSCOMILLAS}* [^\"]* {MENOSCOMILLAS}* "\""
 LineTerminator= \r|\n|\r\n
 InputCharacter=[^\r\n]
 spe="\\""n" | "\\""\'" | "\\""\""
@@ -134,10 +134,6 @@ comentariomultilinea="<!" {any}* "!>"
     return new Symbol(sym.COMA,yyline,yychar, yytext());}
 
 
-\" {Symbol s = new Symbol(sym.COM,yyline,yychar, yytext());
-    T_SIMBOLOS.add(s);
-    return new Symbol(sym.COM,yyline,yychar, yytext());}
-
 
 {spe} {Symbol s = new Symbol(sym.SPECHAR,yyline,yychar, yytext());
     T_SIMBOLOS.add(s);
@@ -152,6 +148,7 @@ comentariomultilinea="<!" {any}* "!>"
 {cadena} {Symbol s = new Symbol(sym.CADENA,yyline,yychar, yytext());
     T_SIMBOLOS.add(s);
     return new Symbol(sym.CADENA,yyline,yychar, yytext());}
+
 
 
 \n {yychar=0;}
