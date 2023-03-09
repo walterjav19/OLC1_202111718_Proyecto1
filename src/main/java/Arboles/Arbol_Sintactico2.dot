@@ -1,18 +1,25 @@
 digraph Arbol_Sintactico{
-
-node0[label = "."];
+  bgcolor = "#E3FFFA"
+node [shape=Mrecord fillcolor="#FFE3FF" style =filled];
+node0[label="{{[5]|.|[5]}|{No anulable|-}}"];
 node0 -> node00
-node00[label = "+"];
+node00[label="{{[2,3,4,1]|.|[2,3,4,1]}|{No anulable|-}}"];
 node00 -> node000
-node000[label = "digito"];
+node000[label="{{[1]|letra|[1]}|{No anulable|1}}"];
+node00 -> node001
+node001[label="{{[2,3,4]|*|[2,3,4]}|{anulable|-}}"];
+node001 -> node0010
+node0010[label="{{[2,3,4]|\||[2,3,4]}|{No anulable|-}}"];
+node0010 -> node00100
+node00100[label="{{[2]|_|[2]}|{No anulable|2}}"];
+node0010 -> node00101
+node00101[label="{{[3,4]|\||[3,4]}|{No anulable|-}}"];
+node00101 -> node001010
+node001010[label="{{[3]|letra|[3]}|{No anulable|3}}"];
+node00101 -> node001011
+node001011[label="{{[4]|digito|[4]}|{No anulable|4}}"];
 node0 -> node01
-node01[label = "."];
-node01 -> node010
-node010[label = "."];
-node01 -> node011
-node011[label = "+"];
-node011 -> node0110
-node0110[label = "digito"];
+node01[label="{{[5]|#|[5]}|{No anulable|5}}"];
 
 
 }

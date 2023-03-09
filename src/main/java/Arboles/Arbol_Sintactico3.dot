@@ -1,18 +1,23 @@
 digraph Arbol_Sintactico{
-
-node0[label = "."];
+  bgcolor = "#E3FFFA"
+node [shape=Mrecord fillcolor="#FFE3FF" style =filled];
+node0[label="{{[4]|.|[4]}|{No anulable|-}}"];
 node0 -> node00
-node00[label = "+"];
+node00[label="{{[3]|.|[3]}|{No anulable|-}}"];
 node00 -> node000
-node000[label = "digito"];
+node000[label="{{[1]|+|[1]}|{No anulable|-}}"];
+node000 -> node0000
+node0000[label="{{[1]|digito|[1]}|{No anulable|1}}"];
+node00 -> node001
+node001[label="{{[3]|.|[3]}|{No anulable|-}}"];
+node001 -> node0010
+node0010[label="{{[2]|.|[2]}|{No anulable|2}}"];
+node001 -> node0011
+node0011[label="{{[3]|+|[3]}|{No anulable|-}}"];
+node0011 -> node00110
+node00110[label="{{[3]|digito|[3]}|{No anulable|3}}"];
 node0 -> node01
-node01[label = "."];
-node01 -> node010
-node010[label = "."];
-node01 -> node011
-node011[label = "+"];
-node011 -> node0110
-node0110[label = "digito"];
+node01[label="{{[4]|#|[4]}|{No anulable|4}}"];
 
 
 }

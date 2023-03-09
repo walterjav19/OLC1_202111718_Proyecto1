@@ -298,6 +298,7 @@ public static void escribir(String path,String TextField2){
             for (Arbol arbol : pars.expresiones.values()) {
           
                 arbol.GraficarSintactico(i+""); // llamas al metodo GraficarSintactico para el arbol
+                
                 i++; // aumentas el valor de i en 1
             }
             
