@@ -1,7 +1,17 @@
 [
   {
-    "Valor":"lnnmms",
-    "ExpresionRegular":"regex",
+    "Valor":"primerLexemaCokoa",
+    "ExpresionRegular":"ExpReg1",
+    "Resultado":"Cadena Invalida"
+  },
+  {
+    "Valor":"34.44",
+    "ExpresionRegular":"ExpresionReg2",
+    "Resultado":"Cadena Valida"
+  },
+  {
+    "Valor":"aa2",
+    "ExpresionRegular":"Prueba",
     "Resultado":"Cadena Valida"
   }
 ]

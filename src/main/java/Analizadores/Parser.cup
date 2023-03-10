@@ -125,10 +125,15 @@ DECLAREGEX ::=
                                         //se agrega a nuestras expresiones valida
                                         NodeArbol asterisco=new NodeArbol("#","",b.Expresion,parser.conthojas,null,null);
                                         NodeArbol conca=new NodeArbol(".","",b.Expresion,-1,b,asterisco);
+                                        conca.SetNexpresion(a);
                                         System.out.println("La Expresion regular con nombre "+a+" equivale a "+b.Expresion);
                                         Arbol a_ex=new Arbol(conca);
+                                        //metodo del arbol del paso 2 en adelante
                                         a_ex.asignarAnulable(a_ex.raiz);
                                         a_ex.calcularPrimerosYUltimos(a_ex.raiz);
+                                        a_ex.calcularSiguientes(a_ex.raiz);
+                                        a_ex.GenerarTablaSiguientes();
+                                        a_ex.imprimirsiguientes();
                                         expresiones.put(a,a_ex);
                                         //reiniciamos el conteo de hojas
                                         parser.conthojas=1;

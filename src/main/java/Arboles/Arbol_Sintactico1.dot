@@ -1,0 +1,25 @@
+digraph Arbol_Sintactico{
+  bgcolor = "#A3F0CF"
+node [shape=Mrecord style =filled];
+label ="Arbol de la Expresion: Prueba"node0[label="{{[1]|.|[5]}|{No anulable|-}}"];
+node0 -> node00
+node00[label="{{[1]|.|[4]}|{No anulable|-}}"];
+node00 -> node000
+node000[label="{{[1]|.|[1,2,3]}|{No anulable|-}}"];
+node000 -> node0000
+node0000[label="{{[1]|letra|[1]}|{No anulable|1}}"];
+node000 -> node0001
+node0001[label="{{[2,3]|*|[2,3]}|{anulable|-}}"];
+node0001 -> node00010
+node00010[label="{{[2,3]|\||[2,3]}|{No anulable|-}}"];
+node00010 -> node000100
+node000100[label="{{[2]|letra|[2]}|{No anulable|2}}"];
+node00010 -> node000101
+node000101[label="{{[3]|digito|[3]}|{No anulable|3}}"];
+node00 -> node001
+node001[label="{{[4]|digito|[4]}|{No anulable|4}}"];
+node0 -> node01
+node01[label="{{[5]|#|[5]}|{No anulable|5}}"];
+
+
+}

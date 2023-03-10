@@ -5,17 +5,74 @@ package Estructuras;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Arbol {
         
     public NodeArbol raiz;
-    
+    public HashMap<Integer, List<Integer>> Siguientes = new HashMap<Integer, List<Integer>>();//por cada hoja un nodo y cada nodo tiene un conjunto o una lista
+    public ArrayList<NodeArbol> leaves = new ArrayList<NodeArbol>();
+    public ArrayList<T_Siguientes> t_Siguientes = new ArrayList<T_Siguientes>();
     public Arbol(NodeArbol raiz) {
         this.raiz = raiz;
     }
+    
+    public void Agregar_Sim(NodeArbol nodo) {
+    if (nodo.hijos.size() == 0) { // Es una hoja
+        leaves.add(nodo);
+    } else { // Es un nodo interno
+        for (NodeArbol hijo : nodo.hijos) {
+            Agregar_Sim(hijo);
+        }
+    }
+}
+    
+    public void GenerarTablaSiguientes(){
+        int i=0;
+        Agregar_Sim(this.raiz);
+        for(Map.Entry<Integer, List<Integer>> entry : Siguientes.entrySet()) {
+            T_Siguientes fila=new T_Siguientes(leaves.get(i).token,entry.getKey(),entry.getValue());
+            t_Siguientes.add(fila);
+            i++;
+        }
+    }
+    public void imprimirsiguientes(){
+        System.out.println("============================ Siguientes ==============================================");
+        for(T_Siguientes f:t_Siguientes){
+            System.out.println(f.toString());
+        }
+        System.out.println("======================================================================================");
+    }
+    
+    
+    
+    public void calcularSiguientes(NodeArbol nodo) {
+    if (nodo.hijos.size() == 0) { // Es una hoja
+        this.Siguientes.put(nodo.id,new ArrayList<Integer>());
+    } else { // Es un nodo interno
+        for (NodeArbol hijo : nodo.hijos) {
+            calcularSiguientes(hijo);
+        }
+        if (nodo.token.equals("*") || nodo.token.equals("+")) {
+            for (int i = 0; i < nodo.ultimos.size(); i++) {
+                this.Siguientes.get(nodo.ultimos.get(i)).addAll(nodo.primeros);
+            }
+        }else if(nodo.token.equals(".") && nodo.hijos.size()!=0){// no es hoja
+            
+            for(int i=0;i<nodo.hijoIzq.ultimos.size();i++){
+                this.Siguientes.get(nodo.hijoIzq.ultimos.get(i)).addAll(nodo.hijos.get(1).primeros);
+            }
+        } 
+    }
+}
+    
+    
     
     public void calcularPrimerosYUltimos(NodeArbol nodo) {
     if (nodo.hijos.size() == 0) { // Es una hoja
@@ -94,7 +151,7 @@ public class Arbol {
 
      public void GraficarSintactico(String i){
         String grafica = "digraph Arbol_Sintactico{\n  bgcolor = \"#A3F0CF\"\n" +
-"node [shape=Mrecord style =filled];\n" + GraficaNodos(this.raiz, "0") + "\n\n}";        
+"node [shape=Mrecord style =filled];\nlabel =\"Arbol de la Expresion: "+this.raiz.NombreExpresion+"\"" + GraficaNodos(this.raiz, "0") + "\n\n}";        
         GenerarDot(grafica, i);
     }
     
