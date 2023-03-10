@@ -1,25 +1,37 @@
 digraph Arbol_Sintactico{
   bgcolor = "#A3F0CF"
 node [shape=Mrecord style =filled];
-label ="Arbol de la Expresion: Regex3"node0[label="{{[1]|.|[5]}|{No anulable|-}}"];
+label ="Arbol de la Expresion: regex"node0[label="{{[1,2]|.|[7]}|{No anulable|-}}"];
 node0 -> node00
-node00[label="{{[1]|.|[1,2,3,4]}|{No anulable|-}}"];
+node00[label="{{[1,2]|.|[4,5,6]}|{No anulable|-}}"];
 node00 -> node000
-node000[label="{{[1]|digito|[1]}|{No anulable|1}}"];
+node000[label="{{[1]|*|[1]}|{anulable|-}}"];
+node000 -> node0000
+node0000[label="{{[1]|numero_1|[1]}|{No anulable|1}}"];
 node00 -> node001
-node001[label="{{[2,3,4]|*|[2,3,4]}|{anulable|-}}"];
+node001[label="{{[2]|.|[4,5,6]}|{No anulable|-}}"];
 node001 -> node0010
-node0010[label="{{[2,3,4]|\||[2,3,4]}|{No anulable|-}}"];
-node0010 -> node00100
-node00100[label="{{[2]|_|[2]}|{No anulable|2}}"];
-node0010 -> node00101
-node00101[label="{{[3,4]|\||[3,4]}|{No anulable|-}}"];
-node00101 -> node001010
-node001010[label="{{[3]|letra|[3]}|{No anulable|3}}"];
-node00101 -> node001011
-node001011[label="{{[4]|digito|[4]}|{No anulable|4}}"];
+node0010[label="{{[2]|numero_0|[2]}|{No anulable|2}}"];
+node001 -> node0011
+node0011[label="{{[3,4]|.|[4,5,6]}|{No anulable|-}}"];
+node0011 -> node00110
+node00110[label="{{[3]|*|[3]}|{anulable|-}}"];
+node00110 -> node001100
+node001100[label="{{[3]|numero_0|[3]}|{No anulable|3}}"];
+node0011 -> node00111
+node00111[label="{{[4]|.|[4,5,6]}|{No anulable|-}}"];
+node00111 -> node001110
+node001110[label="{{[4]|numero_1|[4]}|{No anulable|4}}"];
+node00111 -> node001111
+node001111[label="{{[5,6]|*|[5,6]}|{anulable|-}}"];
+node001111 -> node0011110
+node0011110[label="{{[5,6]|\||[5,6]}|{No anulable|-}}"];
+node0011110 -> node00111100
+node00111100[label="{{[5]|numero_0|[5]}|{No anulable|5}}"];
+node0011110 -> node00111101
+node00111101[label="{{[6]|numero_1|[6]}|{No anulable|6}}"];
 node0 -> node01
-node01[label="{{[5]|#|[5]}|{No anulable|5}}"];
+node01[label="{{[7]|#|[7]}|{No anulable|7}}"];
 
 
 }

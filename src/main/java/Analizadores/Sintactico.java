@@ -491,6 +491,7 @@ conjuntos.put(a,b);
                                         a_ex.calcularSiguientes(a_ex.raiz);
                                         a_ex.GenerarTablaSiguientes();
                                         a_ex.imprimirsiguientes();
+                                        a_ex.GenerarDot();
                                         expresiones.put(a,a_ex);
                                         //reiniciamos el conteo de hojas
                                         parser.conthojas=1;

@@ -51,6 +51,48 @@ public class Arbol {
     }
     
     
+    public void GenerarDot(){
+        String cabeza="digraph {\n" +
+"  node [shape=plaintext]\n" +
+"  mytable [style=filled fillcolor=\"#A3F0CF\" \n" +
+"    label=<<table border=\"0\" cellborder=\"1\"  cellspacing=\"0\">\n" +
+"    <tr><td>Simbolo</td><td>Nodo</td><td>Siguientes</td></tr>";
+        String cuerpo="";
+        String footer="  </table>>];\n" +
+"label=\"Tabla de Siguientes de la Expresion: "+raiz.NombreExpresion+"\";}";
+        for(T_Siguientes f:t_Siguientes){
+            if(f.Siguientes.size()!=0){
+                cuerpo+="<tr><td>"+f.simbolo+"</td><td>"+String.valueOf(f.nodo)+"</td><td>"+f.Siguientes.toString()+"</td></tr>\n";
+            }else{
+                cuerpo+="<tr><td>"+f.simbolo+"</td><td>"+String.valueOf(f.nodo)+"</td><td>------</td></tr>\n";
+            }
+        }
+        FileWriter fichero = null;
+        PrintWriter escritor = null;
+        try{
+            fichero = new FileWriter("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Siguientes_202111718\\"+"Siguiente_"+raiz.NombreExpresion+".dot");
+            escritor = new PrintWriter(fichero);
+            escritor.println(cabeza+cuerpo+footer);
+            escritor.close();
+            fichero.close();
+        } catch (Exception e) {
+            System.out.println("error en generar dot");
+        }
+        
+                
+        String file_input_path = "Siguiente_"+raiz.NombreExpresion+".dot";
+        
+        String file_get_path =  "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Siguientes_202111718\\" +"Siguiente_"+raiz.NombreExpresion+".png" ;
+        try {
+        String rutaArchivo = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Siguientes_202111718\\" + file_input_path;
+        String comando = "dot -Tpng " + rutaArchivo + " -o " + file_get_path;
+        Runtime.getRuntime().exec(comando);
+        } catch (IOException e) {
+            System.out.println("Error al generar la imagen: " + e.getMessage());
+        }
+    }
+    
+    
     
     public void calcularSiguientes(NodeArbol nodo) {
     if (nodo.hijos.size() == 0) { // Es una hoja
