@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+import java.util.Collections;
 
 public class Arbol {
         
@@ -30,6 +30,8 @@ public class Arbol {
             nodo.primeros.addAll(nodo.hijos.get(1).primeros);
             nodo.ultimos.addAll(nodo.hijos.get(0).ultimos);
             nodo.ultimos.addAll(nodo.hijos.get(1).ultimos);
+            Collections.sort(nodo.primeros);
+            Collections.sort(nodo.ultimos);
         } else if (nodo.token.equals(".")) {
             nodo.primeros.addAll(nodo.hijos.get(0).primeros);
             if (nodo.hijos.get(0).anulable) {
@@ -39,15 +41,23 @@ public class Arbol {
             if (nodo.hijos.get(1).anulable) {
                 nodo.ultimos.addAll(nodo.hijos.get(0).ultimos);
             }
+            Collections.sort(nodo.primeros);
+            Collections.sort(nodo.ultimos);
         } else if (nodo.token.equals("*")) {
             nodo.primeros.addAll(nodo.hijos.get(0).primeros);
             nodo.ultimos.addAll(nodo.hijos.get(0).ultimos);
+            Collections.sort(nodo.primeros);
+            Collections.sort(nodo.ultimos);
         }else if (nodo.token.equals("?")) {
             nodo.primeros.addAll(nodo.hijos.get(0).primeros);
             nodo.ultimos.addAll(nodo.hijos.get(0).ultimos);
+            Collections.sort(nodo.primeros);
+            Collections.sort(nodo.ultimos);
         }else if(nodo.token.equals("+")){
             nodo.primeros.addAll(nodo.hijos.get(0).primeros);
             nodo.ultimos.addAll(nodo.hijos.get(0).ultimos);
+            Collections.sort(nodo.primeros);
+            Collections.sort(nodo.ultimos);
         }
     }
 }
@@ -64,15 +74,15 @@ public class Arbol {
         for (NodeArbol hijo : nodo.hijos) {
             asignarAnulable(hijo);
         }
-        if (nodo.token.equals("|")) {
+        if (nodo.token.equals("|")&& nodo.hijos.size()!=0) {
             nodo.anulable = nodo.hijos.get(0).anulable || nodo.hijos.get(1).anulable;
-        } else if (nodo.token.equals(".")) {
+        } else if (nodo.token.equals(".")&& nodo.hijos.size()!=0) {
             nodo.anulable = nodo.hijos.get(0).anulable && nodo.hijos.get(1).anulable;
-        } else if (nodo.token.equals("*")) {
+        } else if (nodo.token.equals("*")&& nodo.hijos.size()!=0) {
             nodo.anulable = true;
-        }else if (nodo.token.equals("?")) {
+        }else if (nodo.token.equals("?")&& nodo.hijos.size()!=0) {
             nodo.anulable = true;
-        }else if(nodo.token.equals("+")){
+        }else if(nodo.token.equals("+")&& nodo.hijos.size()!=0){
             nodo.anulable = nodo.hijos.get(0).anulable;
         }
         else {
@@ -83,8 +93,8 @@ public class Arbol {
 
 
      public void GraficarSintactico(String i){
-        String grafica = "digraph Arbol_Sintactico{\n  bgcolor = \"#E3FFFA\"\n" +
-"node [shape=Mrecord fillcolor=\"#FFE3FF\" style =filled];\n" + GraficaNodos(this.raiz, "0") + "\n\n}";        
+        String grafica = "digraph Arbol_Sintactico{\n  bgcolor = \"#A3F0CF\"\n" +
+"node [shape=Mrecord style =filled];\n" + GraficaNodos(this.raiz, "0") + "\n\n}";        
         GenerarDot(grafica, i);
     }
     
@@ -147,7 +157,7 @@ public class Arbol {
         if(nodo.id!=-1){
             r= "node" + i + "[label=\"{{["+primeros+"]|"+nodoTerm+"|["+ultimos+"]}|{"+a+"|"+String.valueOf(nodo.id)+"}}\"];\n";
         }else{
-            r= "node" + i + "[label=\"{{["+ultimos+"]|"+nodoTerm+"|["+ultimos+"]}|{"+a+"|-}}\"];\n";
+            r= "node" + i + "[label=\"{{["+primeros+"]|"+nodoTerm+"|["+ultimos+"]}|{"+a+"|-}}\"];\n";
         }
         
    

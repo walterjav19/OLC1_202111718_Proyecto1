@@ -1,10 +1,14 @@
 {
-CONJ: numero_1 ->1;
-CONJ: numero_0 ->0;
+CONJ: letra_l->l;
+CONJ: numero_2->2;
+CONJ: letra_n->n;
+CONJ: letra_s->s;
+CONJ: letra_m->m;
+CONJ: letra_x->x;
 
-regex-> .{numero_1}.{numero_0}.{numero_0}.{numero_1}*|{numero_0}{numero_1};
+regex->...|{letra_l}{numero_2}*{letra_n}||{letra_s}*{letra_m}{letra_x}{letra_s};
+
 %%
-
-regex: "1110101";
+regex:"lnnmms";
 
 }

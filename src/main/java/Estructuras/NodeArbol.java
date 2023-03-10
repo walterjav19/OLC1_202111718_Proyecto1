@@ -1,6 +1,7 @@
 
 package Estructuras;
 
+
 import java.util.ArrayList;
 
 public class NodeArbol {
@@ -10,6 +11,7 @@ public class NodeArbol {
     public NodeArbol hijoIzq;
     public NodeArbol hijoDer;
     public Boolean anulable=false;
+    
     
     public ArrayList<NodeArbol> hijos = new ArrayList<NodeArbol>();
     public ArrayList<Integer> primeros = new ArrayList<Integer>();
@@ -22,8 +24,6 @@ public class NodeArbol {
         this.Expresion=Expresion;
         this.id=id;
         this.hijoIzq = hijoIzq;
-        this.hijoDer = hijoDer;
-        
         
         
         if(hijoIzq != null){
