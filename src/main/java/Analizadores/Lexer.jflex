@@ -44,6 +44,9 @@ cadena="\"" {MENOSCOMILLAS}* [^\"]* {MENOSCOMILLAS}* "\""
 LineTerminator= \r|\n|\r\n
 InputCharacter=[^\r\n]
 spe="\\""n" | "\\""\'" | "\\""\""
+ESPA=[ \r\t]
+doblepercen=\n"%%"
+FLECHA="-"{ESPA}*">"
 
 comentariosimple="//" {InputCharacter}* {LineTerminator}?
 comentariomultilinea="<!" {any}* "!>"
@@ -94,12 +97,12 @@ comentariomultilinea="<!" {any}* "!>"
     return new Symbol(sym.BRADER,yyline,yychar, yytext());}
 
 
-"->" {Symbol s = new Symbol(sym.ASIGN,yyline,yychar, yytext());
+{FLECHA} {Symbol s = new Symbol(sym.ASIGN,yyline,yychar, yytext());
     T_SIMBOLOS.add(s);
     return new Symbol(sym.ASIGN,yyline,yychar, yytext());}
 
 
-"%%"  {Symbol s = new Symbol(sym.PERCEN,yyline,yychar, yytext());
+"%%"{doblepercen}? {Symbol s = new Symbol(sym.PERCEN,yyline,yychar, yytext());
       T_SIMBOLOS.add(s);
       return new Symbol(sym.PERCEN,yyline,yychar, yytext());}
 

@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +53,7 @@ public class Arbol {
     
     
     public void GenerarDot(){
-        String cabeza="digraph {\n" +
+        String cabeza="digraph T_Siguientes{\n" +
 "  node [shape=plaintext]\n" +
 "  mytable [style=filled fillcolor=\"#A3F0CF\" \n" +
 "    label=<<table border=\"0\" cellborder=\"1\"  cellspacing=\"0\">\n" +
@@ -70,7 +71,7 @@ public class Arbol {
         FileWriter fichero = null;
         PrintWriter escritor = null;
         try{
-            fichero = new FileWriter("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Siguientes_202111718\\"+"Siguiente_"+raiz.NombreExpresion+".dot");
+            fichero = new FileWriter("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\"+"Siguiente_"+raiz.NombreExpresion+".dot");
             escritor = new PrintWriter(fichero);
             escritor.println(cabeza+cuerpo+footer);
             escritor.close();
@@ -84,15 +85,29 @@ public class Arbol {
         
         String file_get_path =  "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Siguientes_202111718\\" +"Siguiente_"+raiz.NombreExpresion+".png" ;
         try {
-        String rutaArchivo = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Siguientes_202111718\\" + file_input_path;
+        String rutaArchivo = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\" + file_input_path;
         String comando = "dot -Tpng " + rutaArchivo + " -o " + file_get_path;
         Runtime.getRuntime().exec(comando);
         } catch (IOException e) {
             System.out.println("Error al generar la imagen: " + e.getMessage());
         }
     }
+
     
-    
+    public void CalcularTransiciones(){
+        List<Integer> nodos_Examinar=new ArrayList<Integer>();
+        List<List<Integer>> Estados=new ArrayList<List<Integer>>();
+        nodos_Examinar=raiz.primeros;
+        System.out.println("S0"+raiz.primeros.toString());
+        int i=1;
+        while (nodos_Examinar.size()!=0){
+        for(int nodo:nodos_Examinar){
+            System.out.println("Estado S1 :"+t_Siguientes.get(nodo-1));
+            nodos_Examinar=t_Siguientes.get(nodo-1).Siguientes;
+        }
+        
+        }
+ }   
     
     public void calcularSiguientes(NodeArbol nodo) {
     if (nodo.hijos.size() == 0) { // Es una hoja
@@ -276,7 +291,7 @@ public class Arbol {
         FileWriter fichero = null;
         PrintWriter escritor = null;
         try{
-            fichero = new FileWriter("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Arboles\\"+"Arbol_Sintactico"+i+".dot");
+            fichero = new FileWriter("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\"+"Arbol_Sintactico"+i+".dot");
             escritor = new PrintWriter(fichero);
             escritor.println(cadena);
             escritor.close();
@@ -291,9 +306,9 @@ public class Arbol {
         
         String file_input_path = "Arbol_Sintactico"+i+".dot";
         
-        String file_get_path =  "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Arboles\\" +"Arbol_Sintactico"+i+".png" ;
+        String file_get_path =  "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Arboles_202111718\\" +"Arbol_Sintactico"+i+".png" ;
         try {
-        String rutaArchivo = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Arboles\\" + file_input_path;
+        String rutaArchivo = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\" + file_input_path;
         String comando = "dot -Tpng " + rutaArchivo + " -o " + file_get_path;
         Runtime.getRuntime().exec(comando);
         } catch (IOException e) {

@@ -9,7 +9,7 @@ import Estructuras.NodeArbol;
 import Estructuras.Expresiones;
 import Estructuras.Arbol;
 import java.util.LinkedList;
-
+import java.util.HashSet;
 
 
 /* 2. Codigo para el parser, variables, metodos */
@@ -134,6 +134,7 @@ DECLAREGEX ::=
                                         a_ex.calcularSiguientes(a_ex.raiz);
                                         a_ex.GenerarTablaSiguientes();
                                         a_ex.imprimirsiguientes();
+                                        a_ex.CalcularTransiciones();
                                         a_ex.GenerarDot();
                                         expresiones.put(a,a_ex);
                                         //reiniciamos el conteo de hojas

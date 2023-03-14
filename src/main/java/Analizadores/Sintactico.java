@@ -14,6 +14,7 @@ import Estructuras.NodeArbol;
 import Estructuras.Expresiones;
 import Estructuras.Arbol;
 import java.util.LinkedList;
+import java.util.HashSet;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -491,6 +492,7 @@ conjuntos.put(a,b);
                                         a_ex.calcularSiguientes(a_ex.raiz);
                                         a_ex.GenerarTablaSiguientes();
                                         a_ex.imprimirsiguientes();
+                                        a_ex.CalcularTransiciones();
                                         a_ex.GenerarDot();
                                         expresiones.put(a,a_ex);
                                         //reiniciamos el conteo de hojas

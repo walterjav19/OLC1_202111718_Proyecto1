@@ -1,0 +1,37 @@
+digraph Arbol_Sintactico{
+  bgcolor = "#A3F0CF"
+node [shape=Mrecord style =filled];
+label ="Arbol de la Expresion: cadena"node0[label="{{[1]|.|[8]}|{No anulable|-}}"];
+node0 -> node00
+node00[label="{{[1]|.|[7]}|{No anulable|-}}"];
+node00 -> node000
+node000[label="{{[1]|\\'|[1]}|{No anulable|1}}"];
+node00 -> node001
+node001[label="{{[2,3,4,5,6]|.|[7]}|{No anulable|-}}"];
+node001 -> node0010
+node0010[label="{{[2,3,4,5,6]|+|[2,3,4,5,6]}|{No anulable|-}}"];
+node0010 -> node00100
+node00100[label="{{[2,3,4,5,6]|\||[2,3,4,5,6]}|{No anulable|-}}"];
+node00100 -> node001000
+node001000[label="{{[2,3,4,5]|\||[2,3,4,5]}|{No anulable|-}}"];
+node001000 -> node0010000
+node0010000[label="{{[2,3,4]|\||[2,3,4]}|{No anulable|-}}"];
+node0010000 -> node00100000
+node00100000[label="{{[2,3]|\||[2,3]}|{No anulable|-}}"];
+node00100000 -> node001000000
+node001000000[label="{{[2]|\\n|[2]}|{No anulable|2}}"];
+node00100000 -> node001000001
+node001000001[label="{{[3]|minus|[3]}|{No anulable|3}}"];
+node0010000 -> node00100001
+node00100001[label="{{[4]|mayus|[4]}|{No anulable|4}}"];
+node001000 -> node0010001
+node0010001[label="{{[5]|digito|[5]}|{No anulable|5}}"];
+node00100 -> node001001
+node001001[label="{{[6]| |[6]}|{No anulable|6}}"];
+node001 -> node0011
+node0011[label="{{[7]|\\'|[7]}|{No anulable|7}}"];
+node0 -> node01
+node01[label="{{[8]|#|[8]}|{No anulable|8}}"];
+
+
+}

@@ -46,6 +46,14 @@ public class Expresiones {
     }
     
     public String jsonify(){
+        if (this.Valor.contains("\\\'") || this.Valor.contains("\\\"")){
+            this.Valor=this.Valor.replace("\\\"", "");
+            this.Valor=this.Valor.replace("\\\'", "");
+            
+            
+        }
+        
+        
         return "  {\n" +
 "    \"Valor\":"+this.Valor+",\n" +
 "    \"ExpresionRegular\":\""+this.Expresion+"\",\n" +
