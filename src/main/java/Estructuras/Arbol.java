@@ -128,7 +128,7 @@ public List<NodeArbol> seleccionarHojas(List<Integer> valores, String letra) {
         estad.add(raiz.primeros);
         
         
-        
+        //prueba
         for(String letra: alfabeto){
             System.out.println("Transiciones al simbolo: "+letra);
             List<Integer> conjunto=new ArrayList<Integer>();
