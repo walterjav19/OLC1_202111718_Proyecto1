@@ -7,10 +7,10 @@ import java.util.List;
 
 public class Estado {
     public String nombre;
+    public List<Transicion> Transiciones;
     public List<Integer> siguiente_asociado;
     public Boolean inicial;
     public Boolean fin;
-    public HashMap<String, Estado> Transiciones = new HashMap<Integer, Estado>();   
 
     public Estado(String nombre, List<Integer> siguiente_asociado) {
         this.nombre = nombre;
@@ -25,10 +25,16 @@ public class Estado {
         this.fin=false;
     }
     
-    public void AgregarTransicion(String terminal,Estado estado){
-        this.Transiciones.put(terminal, estado);
+    public void addTransicion(String simbolo, Estado destino) {
+        Transicion t=new Transicion(simbolo,destino);
+        System.out.println(t.toString());
+        this.Transiciones.add(t);
     }
-    
+
+    @Override
+    public String toString() {
+        return "Estado: "+ nombre + " " + siguiente_asociado;
+    }
     
     
    

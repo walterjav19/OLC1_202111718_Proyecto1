@@ -19,7 +19,9 @@ public class Arbol {
     public NodeArbol raiz;
     public HashMap<Integer, List<Integer>> Siguientes = new HashMap<Integer, List<Integer>>();//por cada hoja un nodo y cada nodo tiene un conjunto o una lista
     public ArrayList<NodeArbol> leaves = new ArrayList<NodeArbol>();
+    public ArrayList<String> alfabeto = new ArrayList<String>();
     public ArrayList<T_Siguientes> t_Siguientes = new ArrayList<T_Siguientes>();
+    public ArrayList<Estado> AFD = new ArrayList<Estado>();
     public Arbol(NodeArbol raiz) {
         this.raiz = raiz;
     }
@@ -27,6 +29,9 @@ public class Arbol {
     public void Agregar_Sim(NodeArbol nodo) {
     if (nodo.hijos.size() == 0) { // Es una hoja
         leaves.add(nodo);
+        if(!alfabeto.contains(nodo.token)){
+            alfabeto.add(nodo.token);
+        }
     } else { // Es un nodo interno
         for (NodeArbol hijo : nodo.hijos) {
             Agregar_Sim(hijo);
@@ -93,20 +98,48 @@ public class Arbol {
         }
     }
 
+    public List<Integer> BuscarSiguiente(int i){
+        for(T_Siguientes fila:t_Siguientes){
+            if(fila.nodo==i){
+                return fila.Siguientes;
+            }
+        }
+        return null;
+    }
+
+
+    
+public List<NodeArbol> seleccionarHojas(List<Integer> valores, String letra) {
+    List<NodeArbol> hojasSeleccionadas = new ArrayList<>();
+    for (NodeArbol hoja : leaves) {
+        if (hoja.token.equals(letra) && valores.contains(hoja.id)) {
+            hojasSeleccionadas.add(hoja);
+        }
+    }
+    return hojasSeleccionadas;
+}
+
+
     
     public void CalcularTransiciones(){
-        List<Integer> nodos_Examinar=new ArrayList<Integer>();
-        List<List<Integer>> Estados=new ArrayList<List<Integer>>();
-        nodos_Examinar=raiz.primeros;
-        System.out.println("S0"+raiz.primeros.toString());
-        int i=1;
-        while (nodos_Examinar.size()!=0){
-        for(int nodo:nodos_Examinar){
-            System.out.println("Estado S1 :"+t_Siguientes.get(nodo-1));
-            nodos_Examinar=t_Siguientes.get(nodo-1).Siguientes;
+        Estado e=new Estado("S0",raiz.primeros);
+        System.out.println(e.toString());
+        List<List<Integer>> estad=new ArrayList<List<Integer>>();
+        estad.add(raiz.primeros);
+        
+        
+        
+        for(String letra: alfabeto){
+            System.out.println("Transiciones al simbolo: "+letra);
+            List<Integer> conjunto=new ArrayList<Integer>();
+            List<NodeArbol> n_c=seleccionarHojas(estad.get(0),letra);
+            for(NodeArbol nod:n_c){
+                conjunto.addAll(BuscarSiguiente(nod.id));
+            }
+            System.out.println(conjunto.toString());
         }
         
-        }
+    
  }   
     
     public void calcularSiguientes(NodeArbol nodo) {

@@ -18,7 +18,7 @@ public class NodeArbol {
     public ArrayList<NodeArbol> hijos = new ArrayList<NodeArbol>();
     public ArrayList<Integer> primeros = new ArrayList<Integer>();
     public ArrayList<Integer> ultimos = new ArrayList<Integer>();
-    public ArrayList<String> token_leaves = new ArrayList<String>();
+    
     
     public NodeArbol(String token, String lexema,String Expresion, int id, NodeArbol hijoIzq, NodeArbol hijoDer){
         this.token = token;
