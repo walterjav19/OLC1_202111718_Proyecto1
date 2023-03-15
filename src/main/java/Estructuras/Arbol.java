@@ -125,10 +125,12 @@ public List<NodeArbol> seleccionarHojas(List<Integer> valores, String letra) {
         Estado e=new Estado("S0",raiz.primeros);
         System.out.println(e.toString());
         List<List<Integer>> estad=new ArrayList<List<Integer>>();
+        List<List<Integer>> estados_totales=new ArrayList<List<Integer>>();
+        estados_totales.add(raiz.primeros);
         estad.add(raiz.primeros);
         
         
-        //prueba
+        while(estad.size()!=0){
         for(String letra: alfabeto){
             System.out.println("Transiciones al simbolo: "+letra);
             List<Integer> conjunto=new ArrayList<Integer>();
@@ -137,9 +139,19 @@ public List<NodeArbol> seleccionarHojas(List<Integer> valores, String letra) {
                 conjunto.addAll(BuscarSiguiente(nod.id));
             }
             System.out.println(conjunto.toString());
+            if(estados_totales.contains(conjunto)){
+                System.out.println("repetido");
+            }else{
+                estados_totales.add(conjunto);
+                estad.add( conjunto);
+            }
+        }
+            
+            estad.remove(0);
+            
         }
         
-    
+        System.out.println("Los estados son: "+estados_totales.toString());
  }   
     
     public void calcularSiguientes(NodeArbol nodo) {
