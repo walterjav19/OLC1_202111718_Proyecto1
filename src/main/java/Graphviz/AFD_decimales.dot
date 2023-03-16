@@ -1,0 +1,10 @@
+digraph AFD {
+    rankdir=LR;
+
+
+    
+    node [shape = point ]; qi
+
+    node [shape = circle];qi ->S0;
+S0 -> S1 [ label = "digito" ];S1 -> S1 [ label = "digito" ];S1 -> S2 [ label = ""."" ];S2 -> S3 [ label = "digito" ];S3 [shape = doublecircle style=filled, fillcolor=lightblue];
+S3 -> S3 [ label = "digito" ];label="AFD de la expresion:decimales "}

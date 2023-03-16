@@ -138,6 +138,14 @@ public Estado buscarEstado(List<Integer> siguiente){
         System.out.println("============Paso 1============");
         while(estado_actual.size()!=0){
         Estado e=new Estado("S"+i,estado_actual.get(0));
+        if(i==0){// el estado inicial
+            e.esInicio();
+        }
+      
+        if(estado_actual.get(0).contains(t_Siguientes.size())){//si el subconjunto contiene el nodo # o nodo fina es de acep
+            e.esAceptacion();
+        }
+        
         System.out.println(e.toString());
         for(String letra: alfabeto){//cada letra de nuestro alfabeto
             System.out.println("Transiciones al simbolo: "+letra);
@@ -180,7 +188,7 @@ public Estado buscarEstado(List<Integer> siguiente){
         
         System.out.println("=============Verificacion==============");
         for(Estado es:AFD){
-            System.out.println("El estado: "+es.nombre+" Tiene las siguientes Transiciones "+es.Transiciones.toString());
+            System.out.println("El estado: "+es.nombre+" Tiene las siguientes Transiciones "+es.Transiciones.toString()+" Es de aceptacion "+es.aceptacion+" Es inicial "+es.inicial);
         }
         
         
@@ -219,8 +227,13 @@ public Estado buscarEstado(List<Integer> siguiente){
         for(Estado es:AFD){
             Transiciones+="<tr>\n" +
 "                <td>"+es.nombre+" "+es.siguiente_asociado.toString()+"</td>\n";
+            
             for(Transicion tra: es.Transiciones){
                 Transiciones+="<td>"+tra.destino.nombre+"</td>";
+                
+            }
+            if(es.aceptacion){
+                Transiciones+="<td>Aceptacion</td>";
             }
             Transiciones+=c1;
         }
@@ -248,7 +261,7 @@ public Estado buscarEstado(List<Integer> siguiente){
                 
         String file_input_path = "Transicion_"+raiz.NombreExpresion+".dot";
         
-        String file_get_path =  "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Transiciones_202111718\\" +"Siguiente_"+raiz.NombreExpresion+".png" ;
+        String file_get_path =  "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Transiciones_202111718\\" +"Transicion_"+raiz.NombreExpresion+".png" ;
         try {
         String rutaArchivo = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\" + file_input_path;
         String comando = "dot -Tpng " + rutaArchivo + " -o " + file_get_path;
@@ -261,6 +274,68 @@ public Estado buscarEstado(List<Integer> siguiente){
         
         
     }
+    public void GenerarAFD(){
+         
+        String cabeza="digraph AFD {\n" +
+"    rankdir=LR;\n" +
+"\n" +
+"\n" +
+"    \n" +
+"    node [shape = point ]; qi\n" +
+"\n" +
+"    node [shape = circle];";
+        
+        String cuerpo="";
+        for(Estado est:AFD){
+            if(est.inicial){
+                cuerpo+="qi ->"+est.nombre+";\n";
+            }
+            if(est.aceptacion){
+                cuerpo+=est.nombre+" [shape = doublecircle style=filled, fillcolor=lightblue];\n";
+            }
+            
+            for(Transicion tra:est.Transiciones){
+                cuerpo+=est.nombre+ " -> "+tra.destino.nombre+" [ label = \""+tra.letra+"\" ];";
+            }
+            
+        }
+        
+        
+        String footer="label=\"AFD de la expresion:"+this.raiz.NombreExpresion+" \"}";
+        
+        String a=cabeza+cuerpo+footer;
+        
+        
+        
+        FileWriter fichero = null;
+        PrintWriter escritor = null;
+        try{
+            fichero = new FileWriter("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\"+"AFD_"+raiz.NombreExpresion+".dot");
+            escritor = new PrintWriter(fichero);
+            escritor.println(a);
+            escritor.close();
+            fichero.close();
+        } catch (Exception e) {
+            System.out.println("error en generar dot");
+        }
+        
+                
+        String file_input_path = "AFD_"+raiz.NombreExpresion+".dot";
+        
+        String file_get_path =  "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\AFD_202111718\\" +"AFD_"+raiz.NombreExpresion+".png" ;
+        try {
+        String rutaArchivo = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\" + file_input_path;
+        String comando = "dot -Tpng " + rutaArchivo + " -o " + file_get_path;
+        Runtime.getRuntime().exec(comando);
+        } catch (IOException e) {
+            System.out.println("Error al generar la imagen: " + e.getMessage());
+        }
+        
+    }
+    
+    
+    
+    
     
     public void calcularSiguientes(NodeArbol nodo) {
     if (nodo.hijos.size() == 0) { // Es una hoja

@@ -12,20 +12,21 @@ public class Estado {
     public List<Transicion> Transiciones=new ArrayList<Transicion>();
     public List<Integer> siguiente_asociado;
     public Boolean inicial;
-    public Boolean fin;
+    public Boolean aceptacion;
 
     public Estado(String nombre, List<Integer> siguiente_asociado) {
         this.nombre = nombre;
         this.siguiente_asociado = siguiente_asociado;
-        
+        this.inicial=false;
+        this.aceptacion=false;
     }
     
     public void esInicio(){
         this.inicial=true;
     }
     
-    public void esFin(){
-        this.fin=false;
+    public void esAceptacion(){
+        this.aceptacion=true;
     }
     
     public void addTransicion(String simbolo, Estado destino) {

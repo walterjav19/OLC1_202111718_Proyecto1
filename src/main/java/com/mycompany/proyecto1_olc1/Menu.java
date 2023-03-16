@@ -59,7 +59,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arboles", "Siguientes", "Transiciones", "Automatas" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arboles", "Siguientes", "Transiciones", "AFD", "AFND" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -391,6 +391,17 @@ public static void escribir(String path,String TextField2){
             posicionArchivo++;
         }else if (jComboBox1.getSelectedItem().toString().equals("Transiciones")) {
             rutaImagenes = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Transiciones_202111718\\";
+            File carpeta = new File(rutaImagenes);
+            if(posicionArchivo >= carpeta.list().length)posicionArchivo = 0;
+            nombreFinalImagen = carpeta.list()[posicionArchivo];
+            rutaImagenes += nombreFinalImagen;
+            ImageIcon imagen = new ImageIcon(rutaImagenes);
+            ImageIcon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+            jLabel1.setIcon(icono);
+            jLabel1.setText(rutaImagenes);
+            posicionArchivo++;
+        }else if (jComboBox1.getSelectedItem().toString().equals("AFD")) {
+            rutaImagenes = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\AFD_202111718\\";
             File carpeta = new File(rutaImagenes);
             if(posicionArchivo >= carpeta.list().length)posicionArchivo = 0;
             nombreFinalImagen = carpeta.list()[posicionArchivo];
