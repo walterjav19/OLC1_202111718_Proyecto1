@@ -13,7 +13,7 @@ public class Transicion {
 
     @Override
     public String toString() {
-        return "\nCon el simbolo " + letra + " se mueve a" + destino.nombre + "\n";
+        return "Con el simbolo " + letra + " se mueve a " + destino.nombre ;
     }
     
     

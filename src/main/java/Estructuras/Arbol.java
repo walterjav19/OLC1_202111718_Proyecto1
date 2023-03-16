@@ -119,39 +119,72 @@ public List<NodeArbol> seleccionarHojas(List<Integer> valores, String letra) {
     return hojasSeleccionadas;
 }
 
-
+public Estado buscarEstado(List<Integer> siguiente){
+    for(Estado est:AFD){
+        if(est.siguiente_asociado.equals(siguiente)){
+            return est;
+        }
+    }
+    return null;
+}
     
     public void CalcularTransiciones(){
-        Estado e=new Estado("S0",raiz.primeros);
-        System.out.println(e.toString());
-        List<List<Integer>> estad=new ArrayList<List<Integer>>();
+        int i=0;
+        List<List<Integer>> estado_actual=new ArrayList<List<Integer>>();
         List<List<Integer>> estados_totales=new ArrayList<List<Integer>>();
         estados_totales.add(raiz.primeros);
-        estad.add(raiz.primeros);
+        estado_actual.add(raiz.primeros);
         
-        
-        while(estad.size()!=0){
-        for(String letra: alfabeto){
+        System.out.println("============Paso 1============");
+        while(estado_actual.size()!=0){
+        Estado e=new Estado("S"+i,estado_actual.get(0));
+        System.out.println(e.toString());
+        for(String letra: alfabeto){//cada letra de nuestro alfabeto
             System.out.println("Transiciones al simbolo: "+letra);
             List<Integer> conjunto=new ArrayList<Integer>();
-            List<NodeArbol> n_c=seleccionarHojas(estad.get(0),letra);
-            for(NodeArbol nod:n_c){
+            List<NodeArbol> n_c=seleccionarHojas(estado_actual.get(0),letra);
+            for(NodeArbol nod:n_c){//cada nodo a examinar 
                 conjunto.addAll(BuscarSiguiente(nod.id));
             }
             System.out.println(conjunto.toString());
-            if(estados_totales.contains(conjunto)){
-                System.out.println("repetido");
-            }else{
+            if(estados_totales.contains(conjunto) || conjunto.size()==0){//buscar el estado para realizar la transicion
+                
+            }else{//estado nuevo
                 estados_totales.add(conjunto);
-                estad.add( conjunto);
+                estado_actual.add( conjunto);
+                
             }
         }
-            
-            estad.remove(0);
+            AFD.add(e);
+            estado_actual.remove(0);
+            i++;
             
         }
         
-        System.out.println("Los estados son: "+estados_totales.toString());
+        System.out.println("=============PASO 2==============");
+        int j=0;
+        for(Estado es:AFD){
+            System.out.println("Transiciones del Estado "+es.toString());
+            for(String letra:alfabeto){
+                List<Integer> aux=new ArrayList<Integer>();
+                for(NodeArbol le:seleccionarHojas(es.siguiente_asociado,letra)){
+                    aux.addAll(BuscarSiguiente(le.id));
+                }
+                System.out.println("Con la letra "+letra+" Se mueve a "+buscarEstado(aux));
+                if(buscarEstado(aux)!=null){
+                    es.addTransicion(letra, buscarEstado(aux));
+                }
+            }
+            j++;
+        }
+        
+        System.out.println("=============Verificacion==============");
+        for(Estado es:AFD){
+            System.out.println("El estado: "+es.nombre+" Tiene las siguientes Transiciones "+es.Transiciones.toString());
+        }
+        
+        
+        
  }   
     
     public void calcularSiguientes(NodeArbol nodo) {

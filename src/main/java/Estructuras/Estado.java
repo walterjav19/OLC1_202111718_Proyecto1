@@ -1,13 +1,15 @@
 
 package Estructuras;
 
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
 public class Estado {
     public String nombre;
-    public List<Transicion> Transiciones;
+    public List<Transicion> Transiciones=new ArrayList<Transicion>();
     public List<Integer> siguiente_asociado;
     public Boolean inicial;
     public Boolean fin;
@@ -15,6 +17,7 @@ public class Estado {
     public Estado(String nombre, List<Integer> siguiente_asociado) {
         this.nombre = nombre;
         this.siguiente_asociado = siguiente_asociado;
+        
     }
     
     public void esInicio(){
@@ -27,8 +30,7 @@ public class Estado {
     
     public void addTransicion(String simbolo, Estado destino) {
         Transicion t=new Transicion(simbolo,destino);
-        System.out.println(t.toString());
-        this.Transiciones.add(t);
+        Transiciones.add(t);
     }
 
     @Override
