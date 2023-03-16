@@ -181,6 +181,8 @@ public Estado buscarEstado(List<Integer> siguiente){
                 System.out.println("Con la letra "+letra+" Se mueve a "+buscarEstado(aux));
                 if(buscarEstado(aux)!=null){
                     es.addTransicion(letra, buscarEstado(aux));
+                }else{
+                    es.addTransicionVacia();
                 }
             }
             j++;
@@ -196,7 +198,7 @@ public Estado buscarEstado(List<Integer> siguiente){
  }   
     
     public void GenerarDotTransiciones(){
-        int colspan=alfabeto.size()-1;
+        int colspan=alfabeto.size();
         
         String cabecera="digraph Transiciones{\n" +
 "    rankdir=LR;\n" +
@@ -217,20 +219,22 @@ public Estado buscarEstado(List<Integer> siguiente){
         String Terminales="";
         int i,j=0;
         for(String letra:alfabeto){
-            if(letra!="#"){
                 Terminales+="<td>"+letra+"</td>\n";
-            }
         }
         String c1="</tr>\n";
         
         String Transiciones="";
         for(Estado es:AFD){
+            
             Transiciones+="<tr>\n" +
 "                <td>"+es.nombre+" "+es.siguiente_asociado.toString()+"</td>\n";
             
             for(Transicion tra: es.Transiciones){
-                Transiciones+="<td>"+tra.destino.nombre+"</td>";
-                
+                if(tra!=null){
+                   Transiciones+="<td>"+tra.destino.nombre+"</td>";
+                }else{
+                    Transiciones+="<td>----</td>";
+                }
             }
             if(es.aceptacion){
                 Transiciones+="<td>Aceptacion</td>";
@@ -295,9 +299,13 @@ public Estado buscarEstado(List<Integer> siguiente){
             }
             
             for(Transicion tra:est.Transiciones){
+                if(tra!=null){
+                if(tra.letra.contains("\"")){
+                    tra.letra=tra.letra.replace("\"", "");
+                }
                 cuerpo+=est.nombre+ " -> "+tra.destino.nombre+" [ label = \""+tra.letra+"\" ];";
             }
-            
+            }
         }
         
         

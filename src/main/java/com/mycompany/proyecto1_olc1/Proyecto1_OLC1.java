@@ -16,6 +16,7 @@ public class Proyecto1_OLC1 {
         List<Integer> siguiente_asociado2=new ArrayList<Integer>();
         siguiente_asociado2.add(1);
         siguiente_asociado2.add(2);
+        
         System.out.println(siguiente_asociado.equals(siguiente_asociado2));
     }
 }

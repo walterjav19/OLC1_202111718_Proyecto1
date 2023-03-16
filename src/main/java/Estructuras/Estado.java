@@ -34,6 +34,10 @@ public class Estado {
         Transiciones.add(t);
     }
 
+    public void addTransicionVacia() {
+        Transiciones.add(null);
+    }
+    
     @Override
     public String toString() {
         return "Estado: "+ nombre + " " + siguiente_asociado;

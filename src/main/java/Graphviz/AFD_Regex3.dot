@@ -1,0 +1,10 @@
+digraph AFD {
+    rankdir=LR;
+
+
+    
+    node [shape = point ]; qi
+
+    node [shape = circle];qi ->S0;
+S0 -> S1 [ label = "digito" ];S1 [shape = doublecircle style=filled, fillcolor=lightblue];
+S1 -> S1 [ label = "digito" ];S1 -> S1 [ label = "_" ];S1 -> S1 [ label = "letra" ];label="AFD de la expresion:Regex3 "}

@@ -1,22 +1,17 @@
 [
   {
-    "Valor":"soy_un_id_1",
-    "ExpresionRegular":"identificador",
+    "Valor":"primerLexemaCokoa",
+    "ExpresionRegular":"ExpReg1",
+    "Resultado":"Cadena Invalida"
+  },
+  {
+    "Valor":"34.44",
+    "ExpresionRegular":"ExpresionReg2",
     "Resultado":"Cadena Valida"
   },
   {
-    "Valor":"ComPi1",
-    "ExpresionRegular":"identificador",
-    "Resultado":"Cadena Invalida"
-  },
-  {
-    "Valor":"301.59",
-    "ExpresionRegular":"decimales",
-    "Resultado":"Cadena Invalida"
-  },
-  {
-    "Valor":"1505.55",
-    "ExpresionRegular":"decimales",
+    "Valor":"aa2",
+    "ExpresionRegular":"Prueba",
     "Resultado":"Cadena Valida"
   }
 ]

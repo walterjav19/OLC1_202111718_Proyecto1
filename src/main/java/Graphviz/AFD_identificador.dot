@@ -7,4 +7,4 @@ digraph AFD {
 
     node [shape = circle];qi ->S0;
 S0 -> S1 [ label = "abecedarioMinus" ];S1 [shape = doublecircle style=filled, fillcolor=lightblue];
-S1 -> S1 [ label = "abecedarioMinus" ];S1 -> S1 [ label = ""_"" ];S1 -> S1 [ label = "digito" ];label="AFD de la expresion:identificador "}
+S1 -> S1 [ label = "abecedarioMinus" ];S1 -> S1 [ label = "_" ];S1 -> S1 [ label = "digito" ];label="AFD de la expresion:identificador "}
