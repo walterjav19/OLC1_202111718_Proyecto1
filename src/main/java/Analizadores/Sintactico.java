@@ -493,6 +493,7 @@ conjuntos.put(a,b);
                                         a_ex.GenerarTablaSiguientes();
                                         a_ex.imprimirsiguientes();
                                         a_ex.CalcularTransiciones();
+                                        a_ex.GenerarDotTransiciones();
                                         a_ex.GenerarDot();
                                         expresiones.put(a,a_ex);
                                         //reiniciamos el conteo de hojas

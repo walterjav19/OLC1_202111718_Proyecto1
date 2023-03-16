@@ -187,6 +187,81 @@ public Estado buscarEstado(List<Integer> siguiente){
         
  }   
     
+    public void GenerarDotTransiciones(){
+        int colspan=alfabeto.size()-1;
+        
+        String cabecera="digraph Transiciones{\n" +
+"    rankdir=LR;\n" +
+"    bgcolor = \"#A3F0CF\"\n" +
+"    node [shape=plaintext];\n" +
+"    edge [arrowhead=empty];\n" +
+"    \n" +
+"    // Encabezado de la tabla\n" +
+"    header [label=\n" +
+"    <\n" +
+"        <table border=\"0\" cellborder=\"1\" cellspacing=\"0\">\n" +
+"            <tr>\n" +
+"                <td></td>\n" +
+"                <td colspan=\""+colspan+"\">Terminales</td>\n" +
+"            </tr>\n" +
+"            <tr>\n" +
+"                <td>Estado</td>";
+        String Terminales="";
+        int i,j=0;
+        for(String letra:alfabeto){
+            if(letra!="#"){
+                Terminales+="<td>"+letra+"</td>\n";
+            }
+        }
+        String c1="</tr>\n";
+        
+        String Transiciones="";
+        for(Estado es:AFD){
+            Transiciones+="<tr>\n" +
+"                <td>"+es.nombre+" "+es.siguiente_asociado.toString()+"</td>\n";
+            for(Transicion tra: es.Transiciones){
+                Transiciones+="<td>"+tra.destino.nombre+"</td>";
+            }
+            Transiciones+=c1;
+        }
+        
+        
+        String footer="        </table>\n" +
+"    >];\n" +
+"label=\"Transiciones de la expresion: "+this.raiz.NombreExpresion+"\"}";
+        
+        
+        String cuerpo=cabecera+Terminales+c1+Transiciones+footer;
+        
+        FileWriter fichero = null;
+        PrintWriter escritor = null;
+        try{
+            fichero = new FileWriter("C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\"+"Transicion_"+raiz.NombreExpresion+".dot");
+            escritor = new PrintWriter(fichero);
+            escritor.println(cuerpo);
+            escritor.close();
+            fichero.close();
+        } catch (Exception e) {
+            System.out.println("error en generar dot");
+        }
+        
+                
+        String file_input_path = "Transicion_"+raiz.NombreExpresion+".dot";
+        
+        String file_get_path =  "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Transiciones_202111718\\" +"Siguiente_"+raiz.NombreExpresion+".png" ;
+        try {
+        String rutaArchivo = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Graphviz\\" + file_input_path;
+        String comando = "dot -Tpng " + rutaArchivo + " -o " + file_get_path;
+        Runtime.getRuntime().exec(comando);
+        } catch (IOException e) {
+            System.out.println("Error al generar la imagen: " + e.getMessage());
+        }
+        
+        
+        
+        
+    }
+    
     public void calcularSiguientes(NodeArbol nodo) {
     if (nodo.hijos.size() == 0) { // Es una hoja
         this.Siguientes.put(nodo.id,new ArrayList<Integer>());

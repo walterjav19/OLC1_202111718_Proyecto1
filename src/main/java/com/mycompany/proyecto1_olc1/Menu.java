@@ -389,6 +389,17 @@ public static void escribir(String path,String TextField2){
             jLabel1.setIcon(icono);
             jLabel1.setText(rutaImagenes);
             posicionArchivo++;
+        }else if (jComboBox1.getSelectedItem().toString().equals("Transiciones")) {
+            rutaImagenes = "C:\\Users\\USUARIO\\Documents\\NetBeansProjects\\Proyecto1_OLC1\\src\\main\\java\\Transiciones_202111718\\";
+            File carpeta = new File(rutaImagenes);
+            if(posicionArchivo >= carpeta.list().length)posicionArchivo = 0;
+            nombreFinalImagen = carpeta.list()[posicionArchivo];
+            rutaImagenes += nombreFinalImagen;
+            ImageIcon imagen = new ImageIcon(rutaImagenes);
+            ImageIcon icono = new ImageIcon(imagen.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+            jLabel1.setIcon(icono);
+            jLabel1.setText(rutaImagenes);
+            posicionArchivo++;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
