@@ -1,0 +1,44 @@
+digraph Transiciones{
+    rankdir=LR;
+    bgcolor = "#A3F0CF"
+    node [shape=plaintext];
+    edge [arrowhead=empty];
+    
+    // Encabezado de la tabla
+    header [label=
+    <
+        <table border="0" cellborder="1" cellspacing="0">
+            <tr>
+                <td></td>
+                <td colspan="7">Terminales</td>
+            </tr>
+            <tr>
+                <td>Estado</td><td>letra_l</td>
+<td>numero_2</td>
+<td>letra_n</td>
+<td>letra_s</td>
+<td>letra_m</td>
+<td>letra_x</td>
+<td>#</td>
+</tr>
+<tr>
+                <td>S0 [1, 2]</td>
+<td>S1</td><td>S1</td><td>----</td><td>----</td><td>----</td><td>----</td><td>----</td></tr>
+<tr>
+                <td>S1 [3, 4, 5, 6, 7]</td>
+<td>----</td><td>----</td><td>S1</td><td>S2</td><td>S3</td><td>S4</td><td>----</td></tr>
+<tr>
+                <td>S2 [7, 8]</td>
+<td>----</td><td>----</td><td>----</td><td>S5</td><td>----</td><td>----</td><td>----</td><td>Aceptacion</td></tr>
+<tr>
+                <td>S3 [5, 7]</td>
+<td>----</td><td>----</td><td>----</td><td>S5</td><td>S3</td><td>----</td><td>----</td></tr>
+<tr>
+                <td>S4 [7]</td>
+<td>----</td><td>----</td><td>----</td><td>S5</td><td>----</td><td>----</td><td>----</td></tr>
+<tr>
+                <td>S5 [8]</td>
+<td>----</td><td>----</td><td>----</td><td>----</td><td>----</td><td>----</td><td>----</td><td>Aceptacion</td></tr>
+        </table>
+    >];
+label="Transiciones de la expresion: regex"}

@@ -195,7 +195,30 @@ public Estado buscarEstado(List<Integer> siguiente){
         
         
         
- }   
+ }
+    
+    
+     public void calcularAFND(NodeArbol nodo) {
+    if (nodo.hijos.size() == 0) { // Es una hoja
+        System.out.println("hojas");
+    } else { // Es un nodo interno
+        for (NodeArbol hijo : nodo.hijos) {
+            calcularAFND(hijo);
+        }
+        if (nodo.token.equals("|")) {
+            System.out.println("or");
+        } else if (nodo.token.equals(".")) {
+            System.out.println("concat");
+        } else if (nodo.token.equals("*")) {
+            System.out.println("kleene");
+        }else if (nodo.token.equals("?")) {
+            System.out.println("interr");
+        }else if(nodo.token.equals("+")){
+            System.out.println("mas");
+        }
+    }
+}
+    
     
     public void GenerarDotTransiciones(){
         int colspan=alfabeto.size();
