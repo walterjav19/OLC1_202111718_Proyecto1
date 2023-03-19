@@ -22,6 +22,7 @@ public class Arbol {
     public ArrayList<String> alfabeto = new ArrayList<String>();
     public ArrayList<T_Siguientes> t_Siguientes = new ArrayList<T_Siguientes>();
     public ArrayList<Estado> AFD = new ArrayList<Estado>();
+    
     public Arbol(NodeArbol raiz) {
         this.raiz = raiz;
     }
@@ -197,26 +198,34 @@ public Estado buscarEstado(List<Integer> siguiente){
         
  }
     
-    
+   public ArrayList<String> afnd = new ArrayList<String>();
      public void calcularAFND(NodeArbol nodo) {
-    if (nodo.hijos.size() == 0) { // Es una hoja
-        System.out.println("hojas");
-    } else { // Es un nodo interno
-        for (NodeArbol hijo : nodo.hijos) {
-            calcularAFND(hijo);
+        if (nodo.hijos.size() == 0) { // Es una hoja
+            if(nodo.token!="#"){
+
+            }
+
+        } else { // Es un nodo interno
+            for (NodeArbol hijo : nodo.hijos) {
+                calcularAFND(hijo);
+            }
+            if (nodo.token.equals("|")) {
+                afnd.add(nodo.hijos.get(0).token+" | "+nodo.hijos.get(1).token);
+            } else if (nodo.token.equals(".")) {
+                if(nodo.hijos.get(1).token!="#"){
+                   afnd.add(nodo.hijos.get(0).token+" . "+nodo.hijos.get(1).token);
+                }
+
+            } else if (nodo.token.equals("*")) {
+                afnd.add(nodo.hijos.get(0).token+"*");
+            }else if (nodo.token.equals("?")) {
+                afnd.add(nodo.hijos.get(0).token+"?");
+            }else if(nodo.token.equals("+")){
+                afnd.add(nodo.hijos.get(0).token+"+");
+            }
         }
-        if (nodo.token.equals("|")) {
-            System.out.println("or");
-        } else if (nodo.token.equals(".")) {
-            System.out.println("concat");
-        } else if (nodo.token.equals("*")) {
-            System.out.println("kleene");
-        }else if (nodo.token.equals("?")) {
-            System.out.println("interr");
-        }else if(nodo.token.equals("+")){
-            System.out.println("mas");
-        }
-    }
+        
+         System.out.println(afnd);
 }
     
     

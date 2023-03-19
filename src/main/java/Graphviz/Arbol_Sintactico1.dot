@@ -1,0 +1,57 @@
+digraph Arbol_Sintactico{
+  bgcolor = "#A3F0CF"
+node [shape=Mrecord style =filled];
+label ="Arbol de la Expresion: url"node0[label="{{[1]|.|[12]}|{No anulable|-}}"];
+node0 -> node00
+node00[label="{{[1]|.|[11]}|{No anulable|-}}"];
+node00 -> node000
+node000[label="{{[1]|h|[1]}|{No anulable|1}}"];
+node00 -> node001
+node001[label="{{[2]|.|[11]}|{No anulable|-}}"];
+node001 -> node0010
+node0010[label="{{[2]|t|[2]}|{No anulable|2}}"];
+node001 -> node0011
+node0011[label="{{[3]|.|[11]}|{No anulable|-}}"];
+node0011 -> node00110
+node00110[label="{{[3]|t|[3]}|{No anulable|3}}"];
+node0011 -> node00111
+node00111[label="{{[4]|.|[11]}|{No anulable|-}}"];
+node00111 -> node001110
+node001110[label="{{[4]|p|[4]}|{No anulable|4}}"];
+node00111 -> node001111
+node001111[label="{{[5,6]|.|[11]}|{No anulable|-}}"];
+node001111 -> node0011110
+node0011110[label="{{[5]|?|[5]}|{anulable|-}}"];
+node0011110 -> node00111100
+node00111100[label="{{[5]|s|[5]}|{No anulable|5}}"];
+node001111 -> node0011111
+node0011111[label="{{[6]|.|[11]}|{No anulable|-}}"];
+node0011111 -> node00111110
+node00111110[label="{{[6]|:|[6]}|{No anulable|6}}"];
+node0011111 -> node00111111
+node00111111[label="{{[7]|.|[11]}|{No anulable|-}}"];
+node00111111 -> node001111110
+node001111110[label="{{[7]|/|[7]}|{No anulable|7}}"];
+node00111111 -> node001111111
+node001111111[label="{{[8]|.|[11]}|{No anulable|-}}"];
+node001111111 -> node0011111110
+node0011111110[label="{{[8]|/|[8]}|{No anulable|8}}"];
+node001111111 -> node0011111111
+node0011111111[label="{{[9]|.|[11]}|{No anulable|-}}"];
+node0011111111 -> node00111111110
+node00111111110[label="{{[9]|+|[9]}|{No anulable|-}}"];
+node00111111110 -> node001111111100
+node001111111100[label="{{[9]|minuscula|[9]}|{No anulable|9}}"];
+node0011111111 -> node00111111111
+node00111111111[label="{{[10]|.|[11]}|{No anulable|-}}"];
+node00111111111 -> node001111111110
+node001111111110[label="{{[10]|.|[10]}|{No anulable|10}}"];
+node00111111111 -> node001111111111
+node001111111111[label="{{[11]|+|[11]}|{No anulable|-}}"];
+node001111111111 -> node0011111111110
+node0011111111110[label="{{[11]|minuscula|[11]}|{No anulable|11}}"];
+node0 -> node01
+node01[label="{{[12]|#|[12]}|{No anulable|12}}"];
+
+
+}

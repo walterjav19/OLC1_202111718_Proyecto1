@@ -1,39 +1,37 @@
 digraph Arbol_Sintactico{
   bgcolor = "#A3F0CF"
 node [shape=Mrecord style =filled];
-label ="Arbol de la Expresion: regex"node0[label="{{[1,2]|.|[8]}|{No anulable|-}}"];
+label ="Arbol de la Expresion: regex"node0[label="{{[1,2]|.|[7]}|{No anulable|-}}"];
 node0 -> node00
-node00[label="{{[1,2]|.|[7]}|{No anulable|-}}"];
+node00[label="{{[1,2]|.|[4,5,6]}|{No anulable|-}}"];
 node00 -> node000
-node000[label="{{[1,2]|.|[1,2,3,4,5,6]}|{No anulable|-}}"];
+node000[label="{{[1]|*|[1]}|{anulable|-}}"];
 node000 -> node0000
-node0000[label="{{[1,2]|.|[1,2,3]}|{No anulable|-}}"];
-node0000 -> node00000
-node00000[label="{{[1,2]|\||[1,2]}|{No anulable|-}}"];
-node00000 -> node000000
-node000000[label="{{[1]|letra_l|[1]}|{No anulable|1}}"];
-node00000 -> node000001
-node000001[label="{{[2]|numero_2|[2]}|{No anulable|2}}"];
-node0000 -> node00001
-node00001[label="{{[3]|*|[3]}|{anulable|-}}"];
-node00001 -> node000010
-node000010[label="{{[3]|letra_n|[3]}|{No anulable|3}}"];
-node000 -> node0001
-node0001[label="{{[4,5,6]|\||[4,5,6]}|{anulable|-}}"];
-node0001 -> node00010
-node00010[label="{{[4,5]|\||[4,5]}|{anulable|-}}"];
-node00010 -> node000100
-node000100[label="{{[4]|letra_s|[4]}|{No anulable|4}}"];
-node00010 -> node000101
-node000101[label="{{[5]|*|[5]}|{anulable|-}}"];
-node000101 -> node0001010
-node0001010[label="{{[5]|letra_m|[5]}|{No anulable|5}}"];
-node0001 -> node00011
-node00011[label="{{[6]|letra_x|[6]}|{No anulable|6}}"];
+node0000[label="{{[1]|numero_1|[1]}|{No anulable|1}}"];
 node00 -> node001
-node001[label="{{[7]|letra_s|[7]}|{No anulable|7}}"];
+node001[label="{{[2]|.|[4,5,6]}|{No anulable|-}}"];
+node001 -> node0010
+node0010[label="{{[2]|numero_0|[2]}|{No anulable|2}}"];
+node001 -> node0011
+node0011[label="{{[3,4]|.|[4,5,6]}|{No anulable|-}}"];
+node0011 -> node00110
+node00110[label="{{[3]|*|[3]}|{anulable|-}}"];
+node00110 -> node001100
+node001100[label="{{[3]|numero_0|[3]}|{No anulable|3}}"];
+node0011 -> node00111
+node00111[label="{{[4]|.|[4,5,6]}|{No anulable|-}}"];
+node00111 -> node001110
+node001110[label="{{[4]|numero_1|[4]}|{No anulable|4}}"];
+node00111 -> node001111
+node001111[label="{{[5,6]|*|[5,6]}|{anulable|-}}"];
+node001111 -> node0011110
+node0011110[label="{{[5,6]|\||[5,6]}|{No anulable|-}}"];
+node0011110 -> node00111100
+node00111100[label="{{[5]|numero_0|[5]}|{No anulable|5}}"];
+node0011110 -> node00111101
+node00111101[label="{{[6]|numero_1|[6]}|{No anulable|6}}"];
 node0 -> node01
-node01[label="{{[8]|#|[8]}|{No anulable|8}}"];
+node01[label="{{[7]|#|[7]}|{No anulable|7}}"];
 
 
 }

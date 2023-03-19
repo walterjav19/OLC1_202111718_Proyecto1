@@ -2,13 +2,12 @@ digraph T_Siguientes{
   node [shape=plaintext]
   mytable [style=filled fillcolor="#A3F0CF" 
     label=<<table border="0" cellborder="1"  cellspacing="0">
-    <tr><td>Simbolo</td><td>Nodo</td><td>Siguientes</td></tr><tr><td>letra_l</td><td>1</td><td>[3, 4, 5, 6, 7]</td></tr>
-<tr><td>numero_2</td><td>2</td><td>[3, 4, 5, 6, 7]</td></tr>
-<tr><td>letra_n</td><td>3</td><td>[3, 4, 5, 6, 7]</td></tr>
-<tr><td>letra_s</td><td>4</td><td>[7]</td></tr>
-<tr><td>letra_m</td><td>5</td><td>[5, 7]</td></tr>
-<tr><td>letra_x</td><td>6</td><td>[7]</td></tr>
-<tr><td>letra_s</td><td>7</td><td>[8]</td></tr>
-<tr><td>#</td><td>8</td><td>------</td></tr>
+    <tr><td>Simbolo</td><td>Nodo</td><td>Siguientes</td></tr><tr><td>numero_1</td><td>1</td><td>[1, 2]</td></tr>
+<tr><td>numero_0</td><td>2</td><td>[3, 4]</td></tr>
+<tr><td>numero_0</td><td>3</td><td>[3, 4]</td></tr>
+<tr><td>numero_1</td><td>4</td><td>[5, 6, 7]</td></tr>
+<tr><td>numero_0</td><td>5</td><td>[5, 6, 7]</td></tr>
+<tr><td>numero_1</td><td>6</td><td>[5, 6, 7]</td></tr>
+<tr><td>#</td><td>7</td><td>------</td></tr>
   </table>>];
 label="Tabla de Siguientes de la Expresion: regex";}

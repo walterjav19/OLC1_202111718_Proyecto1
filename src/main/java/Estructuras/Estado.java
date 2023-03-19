@@ -25,6 +25,10 @@ public class Estado {
         this.inicial=true;
     }
     
+    public void SetNombre(String nombre){
+        this.nombre=nombre;
+    }
+    
     public void esAceptacion(){
         this.aceptacion=true;
     }
