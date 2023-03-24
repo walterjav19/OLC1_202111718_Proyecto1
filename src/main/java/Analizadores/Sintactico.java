@@ -495,7 +495,8 @@ conjuntos.put(a,b);
                                         a_ex.CalcularTransiciones();
                                         a_ex.GenerarDotTransiciones();
                                         a_ex.GenerarAFD();
-                                        a_ex.calcularAFND(a_ex.raiz);    
+                                        a_ex.calcularAFND(a_ex.raiz);
+                                        
                                         a_ex.GenerarDot();
                                         expresiones.put(a,a_ex);
                                         //reiniciamos el conteo de hojas

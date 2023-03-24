@@ -45,7 +45,8 @@ LineTerminator= \r|\n|\r\n
 InputCharacter=[^\r\n]
 spe="\\""n" | "\\""\'" | "\\""\""
 ESPA=[ \r\t]
-doblepercen=\n"%%"
+ESPAn=[ \r\t\n]
+doblepercen={ESPAn}*"%%"
 FLECHA="-"{ESPA}*">"
 
 comentariosimple="//" {InputCharacter}* {LineTerminator}?

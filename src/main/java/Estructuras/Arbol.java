@@ -198,7 +198,7 @@ public Estado buscarEstado(List<Integer> siguiente){
         
  }
     
-   public ArrayList<String> afnd = new ArrayList<String>();
+   public ArrayList<Estado> afnd = new ArrayList<Estado>();
      public void calcularAFND(NodeArbol nodo) {
         if (nodo.hijos.size() == 0) { // Es una hoja
             if(nodo.token!="#"){
@@ -210,24 +210,32 @@ public Estado buscarEstado(List<Integer> siguiente){
                 calcularAFND(hijo);
             }
             if (nodo.token.equals("|")) {
-                afnd.add(nodo.hijos.get(0).token+" | "+nodo.hijos.get(1).token);
+                System.out.print(nodo.hijos.get(0).token+" ");
+                System.out.print(nodo.token+" ");
+                System.out.print(nodo.hijos.get(1).token+" ");
+              
             } else if (nodo.token.equals(".")) {
-                if(nodo.hijos.get(1).token!="#"){
-                   afnd.add(nodo.hijos.get(0).token+" . "+nodo.hijos.get(1).token);
-                }
+                System.out.print(nodo.hijos.get(0).token+" ");
+                System.out.print(nodo.token+" ");
+                System.out.print(nodo.hijos.get(1).token+" ");
 
             } else if (nodo.token.equals("*")) {
-                afnd.add(nodo.hijos.get(0).token+"*");
+                System.out.print(nodo.hijos.get(0).token+" ");
+                System.out.print(nodo.token+" ");
+           
             }else if (nodo.token.equals("?")) {
-                afnd.add(nodo.hijos.get(0).token+"?");
+                System.out.print(nodo.hijos.get(0).token+" ");
+                System.out.print(nodo.token+" ");
             }else if(nodo.token.equals("+")){
-                afnd.add(nodo.hijos.get(0).token+"+");
+                System.out.print(nodo.hijos.get(0).token+" ");
+                System.out.print(nodo.token+" ");
             }
         }
         
-         System.out.println(afnd);
+        
+         
 }
-    
+
     
     public void GenerarDotTransiciones(){
         int colspan=alfabeto.size();
